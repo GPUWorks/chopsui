@@ -125,8 +125,8 @@ static int test_indentation_errors() {
 static int test_attrs() {
 	errors_t *err = NULL;
 	struct sui_node *node = sui_parse("test\n"
-		"\ttest foo=bar\n"
-		"\ttest foo=bar baz\n"
+		"\ttest foo=10\n"
+		"\ttest foo=10 baz\n"
 		"\ttest foo='string literal'", &err);
 
 	assert(!err);
@@ -137,15 +137,15 @@ static int test_attrs() {
 	assert(n->attributes->bucket_count);
 	struct sui_scalar *s = hashtable_get(n->attributes, "foo");
 	assert(s);
-	assert(s->type == SCALAR_STR);
-	assert(strcmp(s->str, "bar") == 0);
+	assert(s->type == SCALAR_INT);
+	assert(s->ival == 10);
 
 	n = node->children->items[1];
 	assert(n->attributes->bucket_count);
 	s = hashtable_get(n->attributes, "foo");
 	assert(s);
-	assert(s->type == SCALAR_STR);
-	assert(strcmp(s->str, "bar") == 0);
+	assert(s->type == SCALAR_INT);
+	assert(s->ival == 10);
 	s = hashtable_get(n->attributes, "baz");
 	assert(s);
 	assert(s->type == SCALAR_EMPTY);

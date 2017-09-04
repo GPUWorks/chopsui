@@ -2,6 +2,7 @@
 #define _SUI_TYPE_H
 #include <stdint.h>
 #include <stdbool.h>
+#include "scalars.h"
 
 struct sui_node;
 
@@ -18,7 +19,8 @@ struct sui_type_impl {
 	 * Invoked when an attribute is set on this node. Return false to prevent
 	 * the change from being applied.
 	 */
-	bool (*attr)(struct sui_node *node, const char *key, const char *value);
+	bool (*attr)(struct sui_node *node, const char *key,
+			const struct sui_scalar *value);
 	/**
 	 * Return the valid scalar types for this attribute, ORed together.
 	 */

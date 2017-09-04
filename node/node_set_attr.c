@@ -2,13 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include "util/hashtable.h"
+#include "scalars.h"
 #include "node.h"
 
-void node_set_attr(struct sui_node *node, const char *key, const char *value) {
+void node_set_attr(struct sui_node *node, const char *key,
+		const struct sui_scalar *value) {
 	if (node->impl && node->impl->attr) {
 		if (!node->impl->attr(node, key, value)) {
 			return;
 		}
 	}
-	free(hashtable_set(node->attributes, key, strdup(value)));
+	struct sui_scalar *_value = malloc(sizeof(struct sui_scalar));
+	memcpy(_value, value, sizeof(struct sui_scalar));
+	free(hashtable_set(node->attributes, key, _value));
 }

@@ -6,6 +6,17 @@
 #include "scalars.h"
 
 bool scalar_parse(const char *s, struct sui_scalar *scalar) {
+	if (strcmp(s, "true") == 0) {
+		scalar->type = SCALAR_BOOL;
+		scalar->bval = true;
+		return true;
+	}
+	if (strcmp(s, "false") == 0) {
+		scalar->type = SCALAR_BOOL;
+		scalar->bval = false;
+		return true;
+	}
+
 	char *unit;
 	if (strchr(s, '.')) {
 		scalar->fval = strtod(s, &unit);

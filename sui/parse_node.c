@@ -46,7 +46,8 @@ static void push_indent(struct sui_parser_state *state,
 	}
 }
 
-static void commit_type(void *_state, const char *str) {
+static void commit_type(void *_state, const char *str, enum string_type t) {
+	// TODO: validate characters used
 	struct node_state *state = _state;
 	if (state->node->type) {
 		parser_error(state->pstate, "Node cannot have two types");
@@ -67,7 +68,8 @@ static void commit_type(void *_state, const char *str) {
 	}
 }
 
-static void commit_id(void *_state, const char *str) {
+static void commit_id(void *_state, const char *str, enum string_type t) {
+	// TODO: validate characters used
 	struct node_state *state = _state;
 	if (state->node->id) {
 		parser_error(state->pstate, "Node cannot have two IDs");
@@ -77,7 +79,8 @@ static void commit_id(void *_state, const char *str) {
 	}
 }
 
-static void commit_class(void *_state, const char *str) {
+static void commit_class(void *_state, const char *str, enum string_type t) {
+	// TODO: validate characters used
 	struct node_state *state = _state;
 	node_add_class(state->node, str);
 	parser_log(state->pstate, "commit class+='%s'", str);

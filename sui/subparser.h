@@ -15,6 +15,12 @@ enum indent_type {
 	INDENT_TABS
 };
 
+enum string_type {
+	STRING_LITERAL,
+	STRING_DOUBLE_QUOTE,
+	STRING_SINGLE_QUOTE
+};
+
 struct sui_parser_state {
 	struct sui_node *root;
 	int depth;
@@ -30,7 +36,7 @@ void parse_node(struct parser_state *pstate, uint32_t ch);
 void parse_string(struct parser_state *pstate, uint32_t ch);
 
 struct subparser_state *push_string_parser(struct parser_state *pstate,
-		void *state, void (*commit)(void *, const char *));
+		void *state, void (*commit)(void *, const char *, enum string_type));
 
 struct subparser_state *push_attr_parser(struct parser_state *pstate,
 		void *state, void (*commit)(void *, const char *, void *));

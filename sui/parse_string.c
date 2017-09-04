@@ -8,16 +8,10 @@
 #include "subparser.h"
 #include "parser.h"
 
-enum string_type {
-	STRING_LITERAL,
-	STRING_DOUBLE_QUOTE,
-	STRING_SINGLE_QUOTE
-};
-
 struct string_state {
 	str_t *str;
 	enum string_type type;
-	void (*commit)(void *, const char *);
+	void (*commit)(void *, const char *, enum string_type);
 	void *state;
 	struct parser_state *pstate;
 };
@@ -27,14 +21,14 @@ void string_state_free(void *_state) {
 	if (!state) return;
 	if (state->str && state->commit) {
 		// Commit the string at EOF
-		state->commit(state->state, state->str->str);
+		state->commit(state->state, state->str->str, state->type);
 	}
 	str_free(state->str);
 	free(state);
 }
 
 struct subparser_state *push_string_parser(struct parser_state *pstate,
-		void *state, void (*commit)(void *, const char *)) {
+		void *state, void (*commit)(void *, const char *, enum string_type)) {
 	struct subparser_state *subparser = parser_push(
 			pstate, parse_string, "sui:string");
 	subparser->destructor = string_state_free;

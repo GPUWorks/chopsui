@@ -42,7 +42,8 @@ struct sui_scalar {
 };
 
 /**
- * Parses a CSS scalar string into a sui_scalar_t
+ * Parses a CSS scalar string into a sui_scalar_t. Note that this does NOT
+ * handle SCALAR_STR or SCALAR_VOID.
  */
 bool scalar_parse(const char *s, struct sui_scalar *scalar);
 

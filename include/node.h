@@ -5,6 +5,7 @@
 #include "util/hashtable.h"
 #include "util/list.h"
 #include "util/set.h"
+#include "scalars.h"
 #include "type.h"
 
 struct sui_node {
@@ -23,11 +24,12 @@ struct sui_node {
 /**
  * Returns the value of the specified attribute.
  */
-const char *node_get_attr(struct sui_node *node, const char *key);
+const struct sui_scalar *node_get_attr(struct sui_node *node, const char *key);
 /**
  * Sets the specified attribute to the specified value.
  */
-void node_set_attr(struct sui_node *node, const char *key, const char *value);
+void node_set_attr(struct sui_node *node, const char *key,
+		const struct sui_scalar *value);
 
 /**
  * Checks if the specified node has the specified class.
