@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdint.h>
 #include <ctype.h>
+#include "type.h"
 #include "tree.h"
 #include "subparser.h"
 
@@ -52,6 +53,17 @@ static void commit_type(void *_state, const char *str) {
 	} else {
 		state->node->type = strdup(str);
 		parser_log(state->pstate, "commit type='%s'", str);
+		struct sui_type_impl *impl =
+			get_impl_for_type(state->node->type);
+		if (!impl) {
+			parser_error(state->pstate,
+					"Unknown node type '%s'", state->node->type);
+			return;
+		}
+		state->node->impl = impl;
+		if (impl->init) {
+			impl->init(state->node);
+		}
 	}
 }
 

@@ -1,6 +1,7 @@
 #ifndef _SUI_TYPE_H
 #define _SUI_TYPE_H
 #include <stdint.h>
+#include <stdbool.h>
 
 struct sui_node;
 

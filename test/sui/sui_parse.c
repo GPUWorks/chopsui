@@ -7,6 +7,16 @@
 
 char *test_name = "sui/sui_parse";
 
+static void init_test_types() {
+	static struct sui_type_impl impl = { 0 };
+	set_impl_for_type("test", &impl);
+	set_impl_for_type("foo", &impl);
+	set_impl_for_type("bar", &impl);
+	set_impl_for_type("baz", &impl);
+	set_impl_for_type("zab", &impl);
+	set_impl_for_type("rab", &impl);
+}
+
 static int test_type() {
 	errors_t *errs = NULL;
 	struct sui_node *node = sui_parse("test", &errs);
@@ -152,6 +162,7 @@ static int test_attrs() {
 }
 
 int test_main() {
+	init_test_types();
 	return test_type()
 		|| test_class()
 		|| test_id()
