@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "chopsui/css.h"
-#include "chopsui/parser.h"
-#include "chopsui/util/list.h"
-#include "chopsui/util/unicode.h"
-#include "chopsui/util/errors.h"
+#include <chopsui/css.h>
+#include <chopsui/parser.h>
+#include <chopsui/util/list.h>
+#include <chopsui/util/unicode.h>
+#include <chopsui/util/errors.h>
 #include "subparser.h"
 
 struct stylesheet *css_parse(const char *source, errors_t **errs) {

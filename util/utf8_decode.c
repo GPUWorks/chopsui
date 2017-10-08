@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <stddef.h>
-#include "chopsui/util/unicode.h"
+#include <chopsui/util/unicode.h>
 
 uint8_t masks[] = {
 	0x7F,

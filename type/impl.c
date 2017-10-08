@@ -1,6 +1,6 @@
-#include "chopsui/util/hashtable.h"
-#include "chopsui/util/hash.h"
-#include "chopsui/type.h"
+#include <chopsui/util/hashtable.h>
+#include <chopsui/util/hash.h>
+#include <chopsui/type.h>
 
 hashtable_t *types = NULL;
 

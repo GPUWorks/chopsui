@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <ctype.h>
-#include "chopsui/parser.h"
-#include "chopsui/util/list.h"
+#include <chopsui/parser.h>
+#include <chopsui/util/list.h>
 #include "subparser.h"
 
 int sui_parse_ch(struct parser_state *state, uint32_t ch) {

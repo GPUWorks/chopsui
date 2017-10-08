@@ -1,8 +1,8 @@
 #ifndef _SUI_CSS_SUBPARSER_H
 #define _SUI_CSS_SUBPARSER_H
 #include <stdint.h>
-#include "chopsui/parser.h"
-#include "chopsui/css.h"
+#include <chopsui/parser.h>
+#include <chopsui/css.h>
 
 #define FLAG_WHITESPACE 1
 #define FLAG_COMMENTS 2

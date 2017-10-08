@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "chopsui/parser.h"
+#include <chopsui/parser.h>
 
 void parser_pop(struct parser_state *state) {
 	parser_log(state, "parser_pop");

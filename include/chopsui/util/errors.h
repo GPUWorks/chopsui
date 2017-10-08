@@ -1,7 +1,7 @@
 #ifndef _SUI_ERRORS_H
 #define _SUI_ERRORS_H
 #include <stdarg.h>
-#include "chopsui/util/list.h"
+#include <chopsui/util/list.h>
 
 typedef list_t errors_t;
 

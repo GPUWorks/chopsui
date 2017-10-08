@@ -1,9 +1,9 @@
 #include <stdlib.h>
-#include "chopsui/node.h"
-#include "chopsui/util/hash.h"
-#include "chopsui/util/hashtable.h"
-#include "chopsui/util/list.h"
-#include "chopsui/util/set.h"
+#include <chopsui/node.h>
+#include <chopsui/util/hash.h>
+#include <chopsui/util/hashtable.h>
+#include <chopsui/util/list.h>
+#include <chopsui/util/set.h>
 
 struct sui_node *sui_node_create() {
 	struct sui_node *node = calloc(sizeof(struct sui_node), 1);

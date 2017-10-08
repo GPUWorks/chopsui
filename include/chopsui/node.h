@@ -1,11 +1,11 @@
 #ifndef _SUI_NODE_H
 #define _SUI_NODE_H
 #include <stdbool.h>
-#include "chopsui/util/hashtable.h"
-#include "chopsui/util/list.h"
-#include "chopsui/util/set.h"
-#include "chopsui/scalars.h"
-#include "chopsui/type.h"
+#include <chopsui/util/hashtable.h>
+#include <chopsui/util/list.h>
+#include <chopsui/util/set.h>
+#include <chopsui/scalars.h>
+#include <chopsui/type.h>
 
 struct sui_node {
 	struct sui_node *parent;

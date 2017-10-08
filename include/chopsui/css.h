@@ -1,10 +1,10 @@
 #ifndef _SUI_CSS_H
 #define _SUI_CSS_H
 #include <stdio.h>
-#include "chopsui/util/list.h"
-#include "chopsui/util/hashtable.h"
-#include "chopsui/util/errors.h"
-#include "chopsui/scalars.h"
+#include <chopsui/util/list.h>
+#include <chopsui/util/hashtable.h>
+#include <chopsui/util/errors.h>
+#include <chopsui/scalars.h>
 
 enum selector_type {
 	SELECTOR_ANY,          // *

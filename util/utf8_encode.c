@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <stddef.h>
-#include "chopsui/util/unicode.h"
+#include <chopsui/util/unicode.h>
 
 size_t utf8_encode(char *str, uint32_t ch) {
 	size_t len = 0;

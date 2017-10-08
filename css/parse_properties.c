@@ -3,10 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "chopsui/util/list.h"
-#include "chopsui/util/hashtable.h"
-#include "chopsui/util/unicode.h"
-#include "chopsui/util/string.h"
+#include <chopsui/util/list.h>
+#include <chopsui/util/hashtable.h>
+#include <chopsui/util/unicode.h>
+#include <chopsui/util/string.h>
 #include "subparser.h"
 
 struct properties_state {

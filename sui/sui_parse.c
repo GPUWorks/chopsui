@@ -2,11 +2,11 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
-#include "chopsui/sui.h"
-#include "chopsui/node.h"
-#include "chopsui/tree.h"
-#include "chopsui/util/errors.h"
-#include "chopsui/util/unicode.h"
+#include <chopsui/sui.h>
+#include <chopsui/node.h>
+#include <chopsui/tree.h>
+#include <chopsui/util/errors.h>
+#include <chopsui/util/unicode.h>
 #include "subparser.h"
 
 struct sui_node *sui_parse(const char *source, errors_t **errs) {
