@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
-#include "util/list.h"
-#include "util/errors.h"
+#include <chopsui/util/list.h>
+#include <chopsui/util/errors.h>
 
 const char *append_error(errors_t **errs, const char *fmt, ...) {
 	if (!errs) {

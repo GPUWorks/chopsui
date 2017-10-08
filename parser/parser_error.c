@@ -1,8 +1,8 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "util/errors.h"
-#include "parser.h"
+#include <chopsui/util/errors.h>
+#include <chopsui/parser.h>
 
 void parser_error(struct parser_state *state, const char *fmt, ...) {
 	char staticbuf[256];

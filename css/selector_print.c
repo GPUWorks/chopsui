@@ -1,6 +1,6 @@
 #include <stdbool.h>
-#include "util/unicode.h"
-#include "css.h"
+#include <chopsui/util/unicode.h>
+#include <chopsui/css.h>
 
 static void sputs(void (*putch)(uint32_t ch), const char *s) {
 	while (*s) {

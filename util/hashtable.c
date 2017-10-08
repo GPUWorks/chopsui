@@ -1,7 +1,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
-
-#include "util/hashtable.h"
+#include <chopsui/util/hashtable.h>
 
 hashtable_t *hashtable_create(size_t buckets, unsigned int (*hash_function)(const void *)) {
 	hashtable_t *table = malloc(sizeof(hashtable_t));

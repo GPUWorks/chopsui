@@ -1,9 +1,8 @@
 #ifndef _SUI_SUI_SUBPARSER_H
 #define _SUI_SUI_SUBPARSER_H
-
 #include <stdint.h>
-#include "parser.h"
-#include "node.h"
+#include <chopsui/parser.h>
+#include <chopsui/node.h>
 
 #define FLAG_COMMENTS 1
 #define FLAG_WAIT 2

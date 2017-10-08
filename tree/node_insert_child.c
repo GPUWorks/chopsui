@@ -1,6 +1,6 @@
-#include "util/list.h"
-#include "node.h"
-#include "tree.h"
+#include <chopsui/util/list.h>
+#include <chopsui/node.h>
+#include <chopsui/tree.h>
 
 int node_insert_child(struct sui_node *parent, struct sui_node *child,
 		size_t index) {

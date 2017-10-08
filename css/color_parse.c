@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#include "scalars.h"
+#include <chopsui/scalars.h>
 
 struct named_color {
 	const char *name;

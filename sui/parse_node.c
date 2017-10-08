@@ -3,8 +3,8 @@
 #include <string.h>
 #include <stdint.h>
 #include <ctype.h>
-#include "type.h"
-#include "tree.h"
+#include <chopsui/type.h>
+#include <chopsui/tree.h>
 #include "subparser.h"
 
 struct node_state {

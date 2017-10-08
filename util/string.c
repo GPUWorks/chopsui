@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdint.h>
-#include "util/string.h"
-#include "util/unicode.h"
+#include <chopsui/util/string.h>
+#include <chopsui/util/unicode.h>
 
 static void sanity_check(str_t *str) {
 	if (str->str == NULL) {

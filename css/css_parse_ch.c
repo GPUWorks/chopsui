@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "parser.h"
+#include <chopsui/parser.h>
+#include <chopsui/util/list.h>
 #include "subparser.h"
-#include "util/list.h"
 
 int css_parse_ch(struct parser_state *state, uint32_t ch) {
 	struct subparser_state *subp;

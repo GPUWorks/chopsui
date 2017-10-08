@@ -5,11 +5,11 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdio.h>
-#include "util/string.h"
-#include "node.h"
+#include <chopsui/util/string.h>
+#include <chopsui/node.h>
+#include <chopsui/parser.h>
+#include <chopsui/scalars.h>
 #include "subparser.h"
-#include "parser.h"
-#include "scalars.h"
 
 struct attr_state {
 	char *key;

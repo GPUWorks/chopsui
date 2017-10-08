@@ -1,6 +1,6 @@
-#include "util/list.h"
-#include "node.h"
-#include "tree.h"
+#include <chopsui/util/list.h>
+#include <chopsui/node.h>
+#include <chopsui/tree.h>
 
 void node_detach(struct sui_node *node) {
 	if (!node || !node->parent) {

@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <chopsui/util/hash.h>
+#include <chopsui/util/list.h>
+#include <chopsui/util/errors.h>
+#include <chopsui/util/unicode.h>
+#include <chopsui/util/string.h>
 #include "subparser.h"
-#include "util/hash.h"
-#include "util/list.h"
-#include "util/errors.h"
-#include "util/unicode.h"
-#include "util/string.h"
 
 struct document_state {
 	str_t *selector;

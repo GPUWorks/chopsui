@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include "util/list.h"
-#include "css.h"
+#include <chopsui/util/list.h>
+#include <chopsui/css.h>
 
 void stylesheet_free(struct stylesheet *css) {
 	if (!css) return;

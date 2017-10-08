@@ -1,7 +1,7 @@
 #include <string.h>
 #include <assert.h>
+#include <chopsui/util/unicode.h>
 #include "test.h"
-#include "util/unicode.h"
 
 char *test_name = "util/unicode";
 

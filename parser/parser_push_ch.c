@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "parser.h"
+#include <chopsui/parser.h>
 
 void parser_push_ch(struct parser_state *state, uint32_t ch) {
 	state->pending[state->pending_head++] = ch;

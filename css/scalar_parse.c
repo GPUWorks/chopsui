@@ -3,7 +3,7 @@
 #include <string.h>
 #include <strings.h>
 #include <ctype.h>
-#include "scalars.h"
+#include <chopsui/scalars.h>
 
 bool scalar_parse(const char *s, struct sui_scalar *scalar) {
 	if (strcmp(s, "true") == 0) {

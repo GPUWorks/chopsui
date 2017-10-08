@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include "node.h"
-#include "tree.h"
+#include <chopsui/node.h>
+#include <chopsui/tree.h>
 
 static void free_attr_iter(void *val, void *_) {
 	free(val);

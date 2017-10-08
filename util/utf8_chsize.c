@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <stddef.h>
-#include "util/unicode.h"
+#include <chopsui/util/unicode.h>
 
 size_t utf8_chsize(uint32_t ch) {
 	if (ch < 0x80) {

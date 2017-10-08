@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "css.h"
+#include <chopsui/css.h>
 
 void selector_free(struct selector *selector) {
 	while (selector) {

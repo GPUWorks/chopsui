@@ -1,8 +1,8 @@
 #include <string.h>
 #include <assert.h>
-#include "util/hashtable.h"
+#include <chopsui/util/hashtable.h>
+#include <chopsui/css.h>
 #include "test.h"
-#include "css.h"
 
 char *test_name = "css/css_parse";
 

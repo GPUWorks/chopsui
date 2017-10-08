@@ -3,10 +3,10 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "util/string.h"
-#include "node.h"
+#include <chopsui/util/string.h>
+#include <chopsui/node.h>
+#include <chopsui/parser.h>
 #include "subparser.h"
-#include "parser.h"
 
 struct string_state {
 	str_t *str;

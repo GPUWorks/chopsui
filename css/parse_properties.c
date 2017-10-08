@@ -3,11 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <chopsui/util/list.h>
+#include <chopsui/util/hashtable.h>
+#include <chopsui/util/unicode.h>
+#include <chopsui/util/string.h>
 #include "subparser.h"
-#include "util/list.h"
-#include "util/hashtable.h"
-#include "util/unicode.h"
-#include "util/string.h"
 
 struct properties_state {
 	struct style_rule *style_rule;

@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include "util/list.h"
-#include "parser.h"
+#include <chopsui/util/list.h>
+#include <chopsui/parser.h>
 
 struct subparser_state *parser_push(struct parser_state *state,
 		subparser_t parser, const char *name) {
