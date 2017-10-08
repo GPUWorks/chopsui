@@ -1,6 +1,6 @@
 #include <string.h>
 #include <assert.h>
-#include <chopsui/scalars.h>
+#include "chopsui/scalars.h"
 #include "test.h"
 
 char *test_name = "parse/scalar_parse";

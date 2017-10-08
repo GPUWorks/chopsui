@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <chopsui/util/unicode.h>
-#include <chopsui/css.h>
+#include "chopsui/util/unicode.h"
+#include "chopsui/css.h"
 
 static bool parse_selector_atom(struct selector *current, const char **src) {
 	if (!*src || !**src) {

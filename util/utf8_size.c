@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <stddef.h>
-#include <chopsui/util/unicode.h>
+#include "chopsui/util/unicode.h"
 
 struct {
 	uint8_t mask;

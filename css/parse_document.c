@@ -3,11 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <chopsui/util/hash.h>
-#include <chopsui/util/list.h>
-#include <chopsui/util/errors.h>
-#include <chopsui/util/unicode.h>
-#include <chopsui/util/string.h>
+#include "chopsui/util/hash.h"
+#include "chopsui/util/list.h"
+#include "chopsui/util/errors.h"
+#include "chopsui/util/unicode.h"
+#include "chopsui/util/string.h"
 #include "subparser.h"
 
 struct document_state {

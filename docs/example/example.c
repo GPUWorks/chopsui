@@ -1,4 +1,4 @@
-#include <chopsui.h>
+#include "chopsui.h"
 
 void say_hi_clicked(sui_t *source, sui_event_t *event) {
 	sui_alert("Hello world!");

@@ -1,9 +1,9 @@
 #define _XOPEN_SOURCE 500
 #include <stdlib.h>
 #include <string.h>
-#include <chopsui/util/hashtable.h>
-#include <chopsui/scalars.h>
-#include <chopsui/node.h>
+#include "chopsui/util/hashtable.h"
+#include "chopsui/scalars.h"
+#include "chopsui/node.h"
 
 void node_set_attr(struct sui_node *node, const char *key,
 		const struct sui_scalar *value) {

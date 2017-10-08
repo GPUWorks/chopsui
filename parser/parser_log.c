@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
-#include <chopsui/parser.h>
+#include "chopsui/parser.h"
 
 // TODO: make more robust
 

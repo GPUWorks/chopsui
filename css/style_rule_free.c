@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include <chopsui/util/list.h>
-#include <chopsui/css.h>
+#include "chopsui/util/list.h"
+#include "chopsui/css.h"
 
 static void style_property_free_iter(void *prop, void *_) {
 	free(prop);

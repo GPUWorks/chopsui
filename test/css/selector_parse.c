@@ -1,6 +1,6 @@
 #include <string.h>
 #include <assert.h>
-#include <chopsui/css.h>
+#include "chopsui/css.h"
 #include "test.h"
 
 char *test_name = "parse/selector_parse";

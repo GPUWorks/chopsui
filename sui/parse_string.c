@@ -3,9 +3,9 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
-#include <chopsui/util/string.h>
-#include <chopsui/node.h>
-#include <chopsui/parser.h>
+#include "chopsui/util/string.h"
+#include "chopsui/node.h"
+#include "chopsui/parser.h"
 #include "subparser.h"
 
 struct string_state {

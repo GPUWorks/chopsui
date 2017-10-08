@@ -5,10 +5,10 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdio.h>
-#include <chopsui/util/string.h>
-#include <chopsui/node.h>
-#include <chopsui/parser.h>
-#include <chopsui/scalars.h>
+#include "chopsui/util/string.h"
+#include "chopsui/node.h"
+#include "chopsui/parser.h"
+#include "chopsui/scalars.h"
 #include "subparser.h"
 
 struct attr_state {

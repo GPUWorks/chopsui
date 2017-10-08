@@ -1,9 +1,9 @@
 #ifndef _SUI_TREE_H
 #define _SUI_TREE_H
-#include <chopsui/util/list.h>
-#include <chopsui/node.h>
-#include <chopsui/type.h>
-#include <chopsui/css.h>
+#include "chopsui/util/list.h"
+#include "chopsui/node.h"
+#include "chopsui/type.h"
+#include "chopsui/css.h"
 
 /**
  * Finds the first ancestor of node that matches the provided CSS selector.

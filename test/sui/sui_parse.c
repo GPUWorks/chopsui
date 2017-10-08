@@ -1,8 +1,8 @@
 #include <string.h>
 #include <assert.h>
-#include <chopsui/node.h>
-#include <chopsui/sui.h>
-#include <chopsui/scalars.h>
+#include "chopsui/node.h"
+#include "chopsui/sui.h"
+#include "chopsui/scalars.h"
 #include "../test.h"
 
 char *test_name = "sui/sui_parse";

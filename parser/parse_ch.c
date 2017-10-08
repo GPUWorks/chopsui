@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
-#include <chopsui/parser.h>
-#include <chopsui/util/list.h>
+#include "chopsui/parser.h"
+#include "chopsui/util/list.h"
 
 void parse_ch(struct parser_state *state, uint32_t ch) {
 	state->pending[state->pending_head++] = ch;

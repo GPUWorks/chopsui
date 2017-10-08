@@ -2,7 +2,7 @@
 #define _SUI_TYPE_H
 #include <stdint.h>
 #include <stdbool.h>
-#include <chopsui/scalars.h>
+#include "chopsui/scalars.h"
 
 struct sui_node;
 

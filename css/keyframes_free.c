@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include <chopsui/util/list.h>
-#include <chopsui/css.h>
+#include "chopsui/util/list.h"
+#include "chopsui/css.h"
 
 static void keyframe_free(struct keyframe *key) {
 	if (!key) return;

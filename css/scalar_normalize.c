@@ -1,7 +1,7 @@
 #define _XOPEN_SOURCE
 #include <stdlib.h>
 #include <math.h>
-#include <chopsui/scalars.h>
+#include "chopsui/scalars.h"
 
 void scalar_normalize(struct sui_scalar *scalar, struct display_info *info) {
 	switch (scalar->type) {
