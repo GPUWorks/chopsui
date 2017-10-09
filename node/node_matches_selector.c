@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdbool.h>
 #include <strings.h>
 #include <chopsui/node.h>
@@ -5,6 +6,7 @@
 #include "node.h"
 
 bool node_matches_selector(struct sui_node *node, struct selector *selector) {
+	assert(node && selector);
 	while (selector) {
 		switch (selector->type) {
 		case SELECTOR_ANY:
@@ -27,6 +29,14 @@ bool node_matches_selector(struct sui_node *node, struct selector *selector) {
 				return false;
 			}
 			break;
+		case SELECTOR_DESCENDANT:
+			while (node->parent) {
+				if (node_matches_selector(node->parent, selector->next)) {
+					return true;
+				}
+				node = node->parent;
+			}
+			return false;
 		default:
 			// TODO: more selector types
 			return false;

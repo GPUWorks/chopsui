@@ -46,10 +46,34 @@ static int test_id() {
 	return 0;
 }
 
+static int test_descendant() {
+	struct sui_node *root = sui_parse(
+		"test\n"
+		"\tfoo\n"
+		"\t\tbar\n"
+		"\t\t\tbaz"
+	, NULL);
+	struct sui_node *node = root;
+	node = node->children->items[0]; // foo
+	node = node->children->items[0]; // bar
+	node = node->children->items[0]; // baz
+
+	struct selector *matches = selector_parse("foo bar baz");
+	struct selector *missing_middle = selector_parse("foo baz");
+	struct selector *no_match = selector_parse("foo bar");
+	struct selector *no_match_2 = selector_parse("tim");
+	assert(node_matches_selector(node, matches));
+	assert(node_matches_selector(node, missing_middle));
+	assert(!node_matches_selector(node, no_match));
+	assert(!node_matches_selector(node, no_match_2));
+	return 0;
+}
+
 int test_main() {
 	init_test_types();
 	return test_type()
 		|| test_class()
 		|| test_id()
+		|| test_descendant()
 	;
 }

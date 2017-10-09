@@ -6,6 +6,8 @@
 #include <chopsui/util/errors.h>
 #include <chopsui/scalars.h>
 
+// TODO: A fair bit of this state should be made internal
+
 enum selector_type {
 	SELECTOR_ANY,          // *
 	SELECTOR_TYPE,         // type
