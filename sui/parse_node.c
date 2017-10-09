@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <ctype.h>
 #include <chopsui/type.h>
-#include <chopsui/tree.h>
+#include <chopsui/node.h>
 #include "subparser.h"
 
 struct node_state {

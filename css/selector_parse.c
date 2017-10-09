@@ -71,9 +71,10 @@ struct selector *selector_parse(const char *src) {
 					break;
 				}
 				if (ch && !strchr(">~+", ch)) {
-					current->next = calloc(sizeof(struct selector), 1);
 					prev = current;
-					current = current->next;
+					current->prev = calloc(sizeof(struct selector), 1);
+					current = current->prev;
+					current->next = prev;
 				}
 			}
 		}
@@ -130,17 +131,19 @@ struct selector *selector_parse(const char *src) {
 				break;
 		}
 		if (*src) {
-			current->next = calloc(sizeof(struct selector), 1);
 			prev = current;
-			current = current->next;
+			current->prev = calloc(sizeof(struct selector), 1);
+			current = current->prev;
+			current->next = prev;
 		}
 	}
 	if (current->type == SELECTOR_DESCENDANT) {
+		current->next = prev->prev = NULL;
 		selector_free(current);
-		prev->next = NULL;
+		current = prev;
 	}
-	return root;
+	return current;
 error:
-	selector_free(root);
+	selector_free(current);
 	return NULL;
 }

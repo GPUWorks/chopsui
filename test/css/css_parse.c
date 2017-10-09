@@ -20,11 +20,11 @@ static int test_selector() {
 	struct style_rule *rule = ss->rules->items[0];
 	assert(rule && rule->selectors->length == 1);
 	struct selector *selector = rule->selectors->items[0];
-	assert(selector && selector->type == SELECTOR_TYPE);
+	assert(selector && selector->type == SELECTOR_CLASS);
 	selector = selector->next;
 	assert(selector && selector->type == SELECTOR_DESCENDANT);
 	selector = selector->next;
-	assert(selector && selector->type == SELECTOR_CLASS);
+	assert(selector && selector->type == SELECTOR_TYPE);
 	assert(!selector->next);
 	stylesheet_free(ss);
 	return 0;

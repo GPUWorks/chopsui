@@ -11,6 +11,9 @@ static void sputs(void (*putch)(uint32_t ch), const char *s) {
 
 void selector_print(struct selector *s, bool pretty,
 		void (*putch)(uint32_t ch)) {
+	while (s->next) {
+		s = s->next;
+	}
 	while (s) {
 		switch (s->type) {
 		case SELECTOR_TYPE:
@@ -30,7 +33,8 @@ void selector_print(struct selector *s, bool pretty,
 		case SELECTOR_ATTRIBUTE:
 			putch('[');
 			sputs(putch, s->value);
-			/* TODO:
+			sputs(putch, "TODO: attribute selectors");
+			/*
 			switch (s->comparison) {
 			}
 			*/
@@ -61,6 +65,6 @@ void selector_print(struct selector *s, bool pretty,
 			}
 			break;
 		}
-		s = s->next;
+		s = s->prev;
 	}
 }

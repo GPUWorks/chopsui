@@ -29,7 +29,13 @@ enum attribute_comparison {
 };
 
 struct selector {
+	// Note: the most significant selector is the first. In other words, for:
+	//
+	//   foo .bar #baz
+	// 
+	// The first selector in the linked list is #baz, and #baz->next is .bar.
 	struct selector *next;
+	struct selector *prev;
 
 	enum selector_type type;
 	char *value;
