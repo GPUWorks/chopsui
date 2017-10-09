@@ -8,7 +8,8 @@ OBJECTS=$(BDIR)/node/node_get_attr.o \
 		$(BDIR)/node/node_free.o \
 		$(BDIR)/node/node_append_child.o \
 		$(BDIR)/node/node_insert_child.o \
-		$(BDIR)/node/node_detach.o
+		$(BDIR)/node/node_detach.o \
+		$(BDIR)/node/node_matches_selector.o
 
 $(BDIR)/node/node.a: $(OBJECTS)
 	$(AR) $(ARFLAGS) $@ $?
