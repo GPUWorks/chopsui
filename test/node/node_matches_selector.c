@@ -69,11 +69,59 @@ static int test_descendant() {
 	return 0;
 }
 
+static int test_child() {
+	struct sui_node *root = sui_parse(
+		"test\n"
+		"\tfoo\n"
+		"\t\tbar\n"
+		"\t\t\tbaz"
+	, NULL);
+	struct sui_node *node = root;
+	node = node->children->items[0]; // foo
+	node = node->children->items[0]; // bar
+	node = node->children->items[0]; // baz
+
+	struct selector *matches = selector_parse("foo bar > baz");
+	struct selector *missing_middle = selector_parse("foo > baz");
+	struct selector *no_match = selector_parse("foo > bar");
+	struct selector *no_match_2 = selector_parse("tim");
+	assert(node_matches_selector(node, matches));
+	assert(!node_matches_selector(node, missing_middle));
+	assert(!node_matches_selector(node, no_match));
+	assert(!node_matches_selector(node, no_match_2));
+	assert(!node_matches_selector(root, no_match));
+	return 0;
+}
+
+static int test_sibling() {
+	struct sui_node *root = sui_parse(
+		"test\n"
+		"\tfoo\n"
+		"\tbar\n"
+		"\tbaz"
+	, NULL);
+	//struct sui_node *foo = root->children->items[0];
+	//struct sui_node *bar = root->children->items[1];
+	struct sui_node *baz = root->children->items[2];
+
+	struct selector *matches = selector_parse("foo ~ baz");
+	struct selector *matches_2 = selector_parse("bar ~ baz");
+	struct selector *no_match = selector_parse("baz ~ bar");
+	struct selector *no_match_2 = selector_parse("tim ~ bar");
+	assert(node_matches_selector(baz, matches));
+	assert(node_matches_selector(baz, matches_2));
+	assert(!node_matches_selector(baz, no_match));
+	assert(!node_matches_selector(baz, no_match_2));
+	return 0;
+}
+
 int test_main() {
 	init_test_types();
 	return test_type()
 		|| test_class()
 		|| test_id()
 		|| test_descendant()
+		|| test_child()
+		|| test_sibling()
 	;
 }

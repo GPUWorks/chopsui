@@ -37,6 +37,24 @@ bool node_matches_selector(struct sui_node *node, struct selector *selector) {
 				node = node->parent;
 			}
 			return false;
+		case SELECTOR_CHILD:
+			return node->parent && node_matches_selector(
+					node->parent, selector->next);
+		case SELECTOR_SIBLING: {
+			// TODO: this could probably be more effecient in a broader context
+			struct sui_node *parent = node->parent;
+			size_t i = 0;
+			for (i = 0; parent && i < parent->children->length; ++i) {
+				struct sui_node *test = parent->children->items[i];
+				if (node_matches_selector(test, selector->next)) {
+					return true;
+				}
+				if (test == node) {
+					break;
+				}
+			}
+			return false;
+		}
 		default:
 			// TODO: more selector types
 			return false;
