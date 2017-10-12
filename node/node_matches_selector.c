@@ -7,6 +7,7 @@
 
 bool node_matches_selector(struct sui_node *node, struct selector *selector) {
 	assert(node && selector);
+	struct sui_node *parent;
 	while (selector) {
 		switch (selector->type) {
 		case SELECTOR_ANY:
@@ -40,11 +41,10 @@ bool node_matches_selector(struct sui_node *node, struct selector *selector) {
 		case SELECTOR_CHILD:
 			return node->parent && node_matches_selector(
 					node->parent, selector->next);
-		case SELECTOR_SIBLING: {
+		case SELECTOR_SIBLING:
 			// TODO: this could probably be more effecient in a broader context
-			struct sui_node *parent = node->parent;
-			size_t i = 0;
-			for (i = 0; parent && i < parent->children->length; ++i) {
+			parent = node->parent;
+			for (size_t i = 0; parent && i < parent->children->length; ++i) {
 				struct sui_node *test = parent->children->items[i];
 				if (node_matches_selector(test, selector->next)) {
 					return true;
@@ -54,7 +54,19 @@ bool node_matches_selector(struct sui_node *node, struct selector *selector) {
 				}
 			}
 			return false;
-		}
+		case SELECTOR_NEXT_SIBLING:
+			parent = node->parent;
+			for (size_t i = 0; i < parent->children->length; ++i) {
+				struct sui_node *test = parent->children->items[i];
+				if (test == node) {
+					if (i == 0) {
+						return false;
+					}
+					test = parent->children->items[i - 1];
+					return node_matches_selector(test, selector->next);
+				}
+			}
+			return false;
 		default:
 			// TODO: more selector types
 			return false;

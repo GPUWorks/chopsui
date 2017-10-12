@@ -100,8 +100,6 @@ static int test_sibling() {
 		"\tbar\n"
 		"\tbaz"
 	, NULL);
-	//struct sui_node *foo = root->children->items[0];
-	//struct sui_node *bar = root->children->items[1];
 	struct sui_node *baz = root->children->items[2];
 
 	struct selector *matches = selector_parse("foo ~ baz");
@@ -115,6 +113,22 @@ static int test_sibling() {
 	return 0;
 }
 
+static int test_adjacent_sibling() {
+	struct sui_node *root = sui_parse(
+		"test\n"
+		"\tfoo\n"
+		"\tbar\n"
+		"\tbaz"
+	, NULL);
+	struct sui_node *baz = root->children->items[2];
+
+	struct selector *matches = selector_parse("bar + baz");
+	struct selector *no_match = selector_parse("foo + baz");
+	assert(node_matches_selector(baz, matches));
+	assert(!node_matches_selector(baz, no_match));
+	return 0;
+}
+
 int test_main() {
 	init_test_types();
 	return test_type()
@@ -123,5 +137,6 @@ int test_main() {
 		|| test_descendant()
 		|| test_child()
 		|| test_sibling()
+		|| test_adjacent_sibling()
 	;
 }
