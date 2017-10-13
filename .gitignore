@@ -1,6 +1,5 @@
 *.so
 *.a
 *.o
-test_*
 .build
 tags
