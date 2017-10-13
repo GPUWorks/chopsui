@@ -5,7 +5,7 @@
 #include <chopsui/sui.h>
 #include "test.h"
 
-char *test_name = "node/node_find_descendant";
+char *test_name = "node/node_find_descendant(s)";
 
 static void init_test_types() {
 	static struct sui_type_impl impl = { 0 };
@@ -50,10 +50,31 @@ static int test_not_found() {
 	return 0;
 }
 
+static bool test_descendants_iter(struct sui_node *node, void *data) {
+	int *count = data;
+	++(*count);
+	assert(node_has_class(node, "test"));
+	return true;
+}
+
+static int test_descendants() {
+	struct sui_node *node = sui_parse(
+		"foo\n"
+		"\tbar\n"
+		"\t\tbaz .test\n"
+		"\tbaz .test", NULL);
+	struct selector *selector = selector_parse(".test");
+	int count = 0;
+	node_find_descendants(node, selector, test_descendants_iter, &count);
+	assert(count == 2);
+	return 0;
+}
+
 int test_main() {
 	init_test_types();
 	return test_simple()
 		|| test_depth_first()
 		|| test_not_found()
+		|| test_descendants()
 	;
 }

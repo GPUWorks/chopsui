@@ -56,22 +56,23 @@ void node_free(struct sui_node *node);
 struct sui_node node_find_ancestor(struct sui_node *node, struct selector *selector);
 /**
  * Invokes the provided iter function with each anscestor of the node that
- * matches the provided CSS selector.
+ * matches the provided CSS selector. Return false to stop.
  */
-void node_iter_ancestors(struct sui_node *node, struct selector *selector,
-		void (*iter)(struct sui_node *node));
+void node_find_ancestors(struct sui_node *node, struct selector *selector,
+		bool (*iter)(struct sui_node *node, void *data), void *data);
 
 /**
  * Finds the first descendant of node that matches the provided CSS selector.
  * Depth first.
  */
-struct sui_node *node_find_descendant(struct sui_node *node, struct selector *selector);
+struct sui_node *node_find_descendant(struct sui_node *node,
+		struct selector *selector);
 /**
  * Invokes the provided iter function with each descendant of node that matches
- * the provided CSS selector, depth first.
+ * the provided CSS selector, depth first. Return false to stop.
  */
-void node_iter_descendants(struct sui_node *node, struct selector *selector,
-		void (*iter)(struct sui_node *node));
+void node_find_descendants(struct sui_node *node, struct selector *selector,
+		bool (*iter)(struct sui_node *node, void *data), void *data);
 
 /**
  * Adds the node to the end of the parent's children. Returns the number of
