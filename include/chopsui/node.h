@@ -68,16 +68,17 @@ void node_iter_ancestors(struct sui_node *node, struct selector *selector,
 
 /**
  * Finds the first descendant of node that matches the provided CSS selector.
+ * Depth first.
  */
-struct sui_node node_find_descendant(struct sui_node *node, struct selector *selector);
+struct sui_node *node_find_descendant(struct sui_node *node, struct selector *selector);
 /**
  * Creates and returns a list_t of references to descendants of node that
  * match the provided CSS selector.
  */
 list_t *node_find_descendants(struct sui_node *node, struct selector *selector);
 /**
- * Invokes the provided iter function with each descendant of node that matches the
- * provided CSS selector.
+ * Invokes the provided iter function with each descendant of node that matches
+ * the provided CSS selector, depth first.
  */
 void node_iter_descendants(struct sui_node *node, struct selector *selector,
 		void (*iter)(struct sui_node *node));

@@ -67,8 +67,8 @@ bool node_matches_selector(struct sui_node *node, struct selector *selector) {
 				}
 			}
 			return false;
-		default:
-			// TODO: more selector types
+		case SELECTOR_ATTRIBUTE:
+			// TODO: CSS parser doesn't do these yet anyway
 			return false;
 		}
 		selector = selector->next;
