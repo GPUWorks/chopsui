@@ -53,7 +53,8 @@ void node_free(struct sui_node *node);
 /**
  * Finds the first ancestor of node that matches the provided CSS selector.
  */
-struct sui_node node_find_ancestor(struct sui_node *node, struct selector *selector);
+struct sui_node *node_find_ancestor(struct sui_node *node,
+		struct selector *selector);
 /**
  * Invokes the provided iter function with each anscestor of the node that
  * matches the provided CSS selector. Return false to stop.

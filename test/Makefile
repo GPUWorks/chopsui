@@ -8,6 +8,7 @@ TESTS=\
 	$(BDIR)/test_scalar_parse \
 	$(BDIR)/test_css_parse \
 	$(BDIR)/test_node_matches_selector \
+	$(BDIR)/test_node_find_ancestor \
 	$(BDIR)/test_node_find_descendant \
 	$(BDIR)/test_sui_parse \
 	$(BDIR)/test_unicode
