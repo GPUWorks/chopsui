@@ -11,7 +11,7 @@
 
 struct properties_state {
 	struct style_rule *style_rule;
-	str_t *key, *value;
+	sui_str_t *key, *value;
 	bool escape;
 	uint32_t quotes;
 };

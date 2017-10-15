@@ -7,20 +7,20 @@ typedef struct {
 	unsigned int key;
 	void *value;
 	void *next;
-} hashtable_entry_t;
+} sui_hashtable_entry_t;
 
 typedef struct {
 	unsigned int (*hash)(const void *);
-	hashtable_entry_t **buckets;
+	sui_hashtable_entry_t **buckets;
 	size_t bucket_count;
-} hashtable_t;
+} sui_hashtable_t;
 
-hashtable_t *hashtable_create(size_t buckets, unsigned int (*hash_function)(const void *));
-void hashtable_free(hashtable_t *table);
-void *hashtable_get(hashtable_t *table, const void *key);
-void *hashtable_set(hashtable_t *table, const void *key, void *value);
-void *hashtable_del(hashtable_t *table, const void *key);
-bool hashtable_contains(hashtable_t *table, const void *key);
-void hashtable_iter(hashtable_t *table, void (*iter)(void *item, void *state), void *state);
+sui_hashtable_t *hashtable_create(size_t buckets, unsigned int (*hash_function)(const void *));
+void hashtable_free(sui_hashtable_t *table);
+void *hashtable_get(sui_hashtable_t *table, const void *key);
+void *hashtable_set(sui_hashtable_t *table, const void *key, void *value);
+void *hashtable_del(sui_hashtable_t *table, const void *key);
+bool hashtable_contains(sui_hashtable_t *table, const void *key);
+void hashtable_iter(sui_hashtable_t *table, void (*iter)(void *item, void *state), void *state);
 
 #endif

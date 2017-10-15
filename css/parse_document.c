@@ -11,7 +11,7 @@
 #include "subparser.h"
 
 struct document_state {
-	str_t *selector;
+	sui_str_t *selector;
 	struct style_rule *style_rule;
 	struct media_rule *media_rule;
 	struct keyframes *keyframes;

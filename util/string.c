@@ -3,7 +3,7 @@
 #include <chopsui/util/string.h>
 #include <chopsui/util/unicode.h>
 
-static void sanity_check(str_t *str) {
+static void sanity_check(sui_str_t *str) {
 	if (str->str == NULL) {
 		str->str = malloc(16);
 		str->size = 16;
@@ -12,7 +12,7 @@ static void sanity_check(str_t *str) {
 	}
 }
 
-static void ensure_capacity(str_t *str, size_t len) {
+static void ensure_capacity(sui_str_t *str, size_t len) {
 	if (len + 1 >= str->size) {
 		char *new = realloc(str->str, str->size * 2);
 		str->str = new;
@@ -20,17 +20,17 @@ static void ensure_capacity(str_t *str, size_t len) {
 	}
 }
 
-str_t *str_create() {
-	return calloc(sizeof(str_t), 1);
+sui_str_t *str_create() {
+	return calloc(sizeof(sui_str_t), 1);
 }
 
-void str_free(str_t *str) {
+void str_free(sui_str_t *str) {
 	if (!str) return;
 	free(str->str);
 	free(str);
 }
 
-void str_append_ch(str_t *str, uint32_t ch) {
+void str_append_ch(sui_str_t *str, uint32_t ch) {
 	int size = utf8_chsize(ch);
 	if (size <= 0) {
 		return;

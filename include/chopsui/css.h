@@ -34,7 +34,7 @@ struct selector {
 	// Note: the most significant selector is the first. In other words, for:
 	//
 	//   foo .bar #baz
-	// 
+	//
 	// The first selector in the linked list is #baz, and #baz->next is .bar.
 	struct selector *next;
 	struct selector *prev;
@@ -65,8 +65,8 @@ void selector_print(struct selector *selector, bool pretty,
 		void (*putch)(uint32_t ch));
 
 struct style_rule {
-	list_t *selectors;
-	hashtable_t *properties;
+	sui_list_t *selectors;
+	sui_hashtable_t *properties;
 };
 
 void style_rule_free(struct style_rule *style_rule);
@@ -104,20 +104,20 @@ void media_rule_free(struct media_rule *media_rule);
 
 struct keyframe {
 	struct sui_scalar at;
-	list_t *rules;
+	sui_list_t *rules;
 };
 
 struct keyframes {
 	char *identifier;
-	list_t *keys;
+	sui_list_t *keys;
 };
 
 void keyframes_free(struct keyframes *keyframes);
 
 struct stylesheet {
-	list_t *rules;
-	list_t *media_rules;
-	list_t *keyframes;
+	sui_list_t *rules;
+	sui_list_t *media_rules;
+	sui_list_t *keyframes;
 };
 
 struct stylesheet *css_parse(const char *source, errors_t **errs);
