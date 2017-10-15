@@ -3,7 +3,7 @@
 #include <stdarg.h>
 #include <chopsui/util/list.h>
 
-typedef list_t errors_t;
+typedef sui_list_t errors_t;
 
 const char *append_error(errors_t **errs, const char *fmt, ...);
 void errors_free(errors_t *errs);

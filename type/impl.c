@@ -2,7 +2,7 @@
 #include <chopsui/util/hash.h>
 #include <chopsui/type.h>
 
-hashtable_t *types = NULL;
+sui_hashtable_t *types = NULL;
 
 struct sui_type_impl *get_impl_for_type(const char *type) {
 	if (!types) {

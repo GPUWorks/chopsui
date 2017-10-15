@@ -2,32 +2,32 @@
 #include <stdlib.h>
 #include <chopsui/util/hashtable.h>
 
-hashtable_t *hashtable_create(size_t buckets, unsigned int (*hash_function)(const void *)) {
-	hashtable_t *table = malloc(sizeof(hashtable_t));
+sui_hashtable_t *hashtable_create(size_t buckets, unsigned int (*hash_function)(const void *)) {
+	sui_hashtable_t *table = malloc(sizeof(sui_hashtable_t));
 	table->hash = hash_function;
 	table->bucket_count = buckets;
-	table->buckets = calloc(buckets, sizeof(hashtable_entry_t));
+	table->buckets = calloc(buckets, sizeof(sui_hashtable_entry_t));
 	return table;
 }
 
-static void free_bucket(hashtable_entry_t *bucket) {
+static void free_bucket(sui_hashtable_entry_t *bucket) {
 	if (bucket) {
 		free_bucket(bucket->next);
 		free(bucket);
 	}
 }
 
-void hashtable_free(hashtable_t *table) {
+void hashtable_free(sui_hashtable_t *table) {
 	for (size_t i = 0; i < table->bucket_count; ++i) {
 		free_bucket(table->buckets[i]);
 	}
 	free(table);
 }
 
-bool hashtable_contains(hashtable_t *table, const void *key) {
+bool hashtable_contains(sui_hashtable_t *table, const void *key) {
 	unsigned int hash = table->hash(key);
 	unsigned int bucket = hash % table->bucket_count;
-	hashtable_entry_t *entry = table->buckets[bucket];
+	sui_hashtable_entry_t *entry = table->buckets[bucket];
 	if (entry) {
 		if (entry->key != hash) {
 			while (entry->next) {
@@ -43,10 +43,10 @@ bool hashtable_contains(hashtable_t *table, const void *key) {
 	return true;
 }
 
-void *hashtable_get(hashtable_t *table, const void *key) {
+void *hashtable_get(sui_hashtable_t *table, const void *key) {
 	unsigned int hash = table->hash(key);
 	unsigned int bucket = hash % table->bucket_count;
-	hashtable_entry_t *entry = table->buckets[bucket];
+	sui_hashtable_entry_t *entry = table->buckets[bucket];
 	if (entry) {
 		if (entry->key != hash) {
 			while (entry->next) {
@@ -62,11 +62,11 @@ void *hashtable_get(hashtable_t *table, const void *key) {
 	return entry->value;
 }
 
-void *hashtable_set(hashtable_t *table, const void *key, void *value) {
+void *hashtable_set(sui_hashtable_t *table, const void *key, void *value) {
 	unsigned int hash = table->hash(key);
 	unsigned int bucket = hash % table->bucket_count;
-	hashtable_entry_t *entry = table->buckets[bucket];
-	hashtable_entry_t *previous = NULL;
+	sui_hashtable_entry_t *entry = table->buckets[bucket];
+	sui_hashtable_entry_t *previous = NULL;
 
 	if (entry) {
 		if (entry->key != hash) {
@@ -81,7 +81,7 @@ void *hashtable_set(hashtable_t *table, const void *key, void *value) {
 	}
 
 	if (entry == NULL) {
-		entry = calloc(1, sizeof(hashtable_entry_t));
+		entry = calloc(1, sizeof(sui_hashtable_entry_t));
 		entry->key = hash;
 		table->buckets[bucket] = entry;
 		if (previous) {
@@ -94,11 +94,11 @@ void *hashtable_set(hashtable_t *table, const void *key, void *value) {
 	return old;
 }
 
-void *hashtable_del(hashtable_t *table, const void *key) {
+void *hashtable_del(sui_hashtable_t *table, const void *key) {
 	unsigned int hash = table->hash(key);
 	unsigned int bucket = hash % table->bucket_count;
-	hashtable_entry_t *entry = table->buckets[bucket];
-	hashtable_entry_t *previous = NULL;
+	sui_hashtable_entry_t *entry = table->buckets[bucket];
+	sui_hashtable_entry_t *previous = NULL;
 
 	if (entry) {
 		if (entry->key != hash) {
@@ -126,9 +126,9 @@ void *hashtable_del(hashtable_t *table, const void *key) {
 	}
 }
 
-void hashtable_iter(hashtable_t *table, void (*iter)(void *item, void *state), void *state) {
+void hashtable_iter(sui_hashtable_t *table, void (*iter)(void *item, void *state), void *state) {
 	for (size_t i = 0; i < table->bucket_count; ++i) {
-		hashtable_entry_t *entry = table->buckets[i];
+		sui_hashtable_entry_t *entry = table->buckets[i];
 		while (entry) {
 			iter(entry->value, state);
 			entry = entry->next;

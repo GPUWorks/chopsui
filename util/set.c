@@ -2,32 +2,32 @@
 #include <stdlib.h>
 #include <chopsui/util/set.h>
 
-set_t *set_create(size_t buckets, unsigned int (*hash_function)(const void *)) {
-	set_t *set = malloc(sizeof(set_t));
+sui_set_t *set_create(size_t buckets, unsigned int (*hash_function)(const void *)) {
+	sui_set_t *set = malloc(sizeof(sui_set_t));
 	set->hash = hash_function;
 	set->bucket_count = buckets;
-	set->buckets = calloc(buckets, sizeof(set_entry_t));
+	set->buckets = calloc(buckets, sizeof(sui_set_entry_t));
 	return set;
 }
 
-void free_bucket(set_entry_t *bucket) {
+void free_bucket(sui_set_entry_t *bucket) {
 	if (bucket) {
 		free_bucket(bucket->next);
 		free(bucket);
 	}
 }
 
-void set_free(set_t *set) {
+void set_free(sui_set_t *set) {
 	for (size_t i = 0; i < set->bucket_count; ++i) {
 		free_bucket(set->buckets[i]);
 	}
 	free(set);
 }
 
-bool set_contains(set_t *set, const void *key) {
+bool set_contains(sui_set_t *set, const void *key) {
 	unsigned int hash = set->hash(key);
 	unsigned int bucket = hash % set->bucket_count;
-	set_entry_t *entry = set->buckets[bucket];
+	sui_set_entry_t *entry = set->buckets[bucket];
 	if (entry) {
 		if (entry->key != hash) {
 			while (entry->next) {
@@ -43,11 +43,11 @@ bool set_contains(set_t *set, const void *key) {
 	return true;
 }
 
-void set_add(set_t *set, const void *key) {
+void set_add(sui_set_t *set, const void *key) {
 	unsigned int hash = set->hash(key);
 	unsigned int bucket = hash % set->bucket_count;
-	set_entry_t *entry = set->buckets[bucket];
-	set_entry_t *previous = NULL;
+	sui_set_entry_t *entry = set->buckets[bucket];
+	sui_set_entry_t *previous = NULL;
 
 	if (entry) {
 		if (entry->key != hash) {
@@ -62,7 +62,7 @@ void set_add(set_t *set, const void *key) {
 	}
 
 	if (entry == NULL) {
-		entry = calloc(1, sizeof(set_entry_t));
+		entry = calloc(1, sizeof(sui_set_entry_t));
 		entry->key = hash;
 		set->buckets[bucket] = entry;
 		if (previous) {
@@ -71,11 +71,11 @@ void set_add(set_t *set, const void *key) {
 	}
 }
 
-void set_del(set_t *set, const void *key) {
+void set_del(sui_set_t *set, const void *key) {
 	unsigned int hash = set->hash(key);
 	unsigned int bucket = hash % set->bucket_count;
-	set_entry_t *entry = set->buckets[bucket];
-	set_entry_t *previous = NULL;
+	sui_set_entry_t *entry = set->buckets[bucket];
+	sui_set_entry_t *previous = NULL;
 
 	if (entry) {
 		if (entry->key != hash) {

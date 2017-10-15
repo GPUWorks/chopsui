@@ -9,7 +9,7 @@
 #include "subparser.h"
 
 struct string_state {
-	str_t *str;
+	sui_str_t *str;
 	enum string_type type;
 	void (*commit)(void *, const char *, enum string_type);
 	void *state;

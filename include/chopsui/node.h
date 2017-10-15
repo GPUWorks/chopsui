@@ -13,9 +13,9 @@ struct sui_node {
 
 	char *type;
 	char *id;
-	set_t *classes;          // char *
-	list_t *children;        // struct sui_node
-	hashtable_t *attributes; // char *, char *
+	sui_set_t *classes;          // char *
+	sui_list_t *children;        // struct sui_node
+	sui_hashtable_t *attributes; // char *, char *
 
 	void *impl_state;
 	struct sui_type_impl *impl;
