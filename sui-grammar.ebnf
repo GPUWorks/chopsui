@@ -1,6 +1,6 @@
 document = { line };
 
-line = (node | comment | lf) , lf;
+line = ( node | comment | lf ) , lf;
 
 inline_node =
     type ,
