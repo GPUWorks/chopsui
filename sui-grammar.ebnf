@@ -43,7 +43,7 @@ content = inline_content | nextline_content;
 
 inline_content = whitespace , '~' , whitespace , ? .* ?;
 
-nextline_content = { ? depth + 1 ? , ? .*$ ?, lfc } , ? depth - 1 ?;
+nextline_content = '~' , lfc , { ? depth + 1 ? , ? .*$ ?, lfc } , ? depth - 1 ?;
 
 string = ('"' , ? all characters but '"' or '\n' ? , '"');
        | ("'" , ? all characters but "'" or '\n' ? , "'");
