@@ -1,0 +1,61 @@
+document = { line };
+
+line = (node | comment | lf) , lf;
+
+inline_node =
+    type ,
+    [ whitespace , id ] ,
+    [ whitespace , class_list ] ,
+    [ whitespace , attr_list ];
+
+node = ? depth + 1 ? ,
+    type ,
+    [ whitespace , id ] ,
+    [ whitespace , class_list ] ,
+    [ whitespace , ( attr_list | multiline_attrs ) ] ,
+    [ ( inline_children | children | content ) ] ,
+    lfc , ? depth - 1 ?;
+
+type = atom;
+
+id = '@' , atom;
+
+class_list = { class };
+
+class = '.' atom;
+
+multiline_attrs =
+    '[' , ? depth + 1 ? , attr_list , ? depth - 1 ? , ']';
+
+attr_list = { attribute , whitespace };
+
+attribute = key , [ whitespace ] , '=' , [ whitespace ] , value;
+
+key = atom;
+
+value = atom | string;
+
+children = { node , lfc };
+
+inline_children = whitespace , '{' , { inline_node , whitespace } , '}';
+
+content = inline_content | nextline_content;
+
+inline_content = whitespace , '~' , whitespace , ? .* ?;
+
+nextline_content = { ? depth + 1 ? , ? .*$ ?, lfc } , ? depth - 1 ?;
+
+string = ('"' , ? all characters but '"' or '\n' ? , '"');
+       | ("'" , ? all characters but "'" or '\n' ? , "'");
+
+atom = ? [a-z_][a-z0-9_-]* ?;
+
+lfc = lf | comment;
+
+comment = [ whitespace ] , '#' , ? .* ? , lf;
+
+whiteorlf = { whitespace | lf };
+
+whitespace = { ' ' | '\t' };
+
+lf = '\n';
