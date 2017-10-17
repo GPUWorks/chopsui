@@ -45,7 +45,7 @@ inline_content = whitespace , '~' , whitespace , ? .* ?;
 
 nextline_content = '~' , lfc , { ? depth + 1 ? , ? .*$ ?, lfc } , ? depth - 1 ?;
 
-string = ('"' , ? all characters but '"' or '\n' ? , '"');
+string = ('"' , ? all characters but '"' or '\n' ? , '"')
        | ("'" , ? all characters but "'" or '\n' ? , "'");
 
 atom = ? [a-z_][a-z0-9_-]* ?;
