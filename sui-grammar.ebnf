@@ -45,8 +45,8 @@ inline_content = whitespace , '~' , whitespace , ? .* ?;
 
 nextline_content = '~' , lfc , { ? depth + 1 ? , ? .*$ ?, lfc } , ? depth - 1 ?;
 
-string = ('"' , ? all characters but '"' or '\n' ? , '"')
-       | ("'" , ? all characters but "'" or '\n' ? , "'");
+string = ('"' , ? [^"\n]* ? , '"')
+       | ("'" , ? [^'\n]* ? , "'");
 
 atom = ? [a-z_][a-z0-9_-]* ?;
 
@@ -59,3 +59,16 @@ whiteorlf = { whitespace | lf };
 whitespace = { ' ' | '\t' };
 
 lf = '\n';
+
+(*
+
+`depth` is defined as a number of whitespaces which is initially zero, and
+increments when `depth + 1` is encountered and decrements when `depth - 1` is
+encountered. `depth +/- 1` operations evaluate before being used, thus if the
+depth is 1 and you encounter `depth + 1`, you should increment depth and expect
+two whitespaces. All documents must use EITHER ' ' or '\t' for the whitespace
+used in depth matches throughout the entire document.
+
+Other ? ? matches are given in terms of regular expressions.
+
+*)
