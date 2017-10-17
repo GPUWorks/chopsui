@@ -43,7 +43,9 @@ content = inline_content | nextline_content;
 
 inline_content = whitespace , '~' , whitespace , ? .* ?;
 
-nextline_content = '~' , lfc , { ? depth + 1 ? , ? .*$ ?, lfc } , ? depth - 1 ?;
+nextline_content = '~' , lfc , ? depth + 1 ?
+                   { ? .*$ ?, lfc } ,
+                   ? depth - 1 ?;
 
 string = ('"' , ? [^"\n]* ? , '"')
        | ("'" , ? [^'\n]* ? , "'");
