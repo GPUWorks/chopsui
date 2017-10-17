@@ -10,7 +10,7 @@ inline_node =
 
 node = ? depth + 1 ? ,
     type ,
-    [ whitespace , id ] ,
+    [ whitespace , '@' , id ] ,
     [ whitespace , class_list ] ,
     [ whitespace , ( attr_list | multiline_attrs ) ] ,
     [ ( inline_children | children | content ) ] ,
@@ -18,11 +18,11 @@ node = ? depth + 1 ? ,
 
 type = atom;
 
-id = '@' , atom;
+id = atom;
 
-class_list = { class };
+class_list = { '.' , class };
 
-class = '.' atom;
+class = atom;
 
 multiline_attrs =
     '[' , ? depth + 1 ? , attr_list , ? depth - 1 ? , ']';
