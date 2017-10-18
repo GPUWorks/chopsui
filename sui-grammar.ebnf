@@ -24,8 +24,9 @@ class_list = { '.' , class };
 
 class = atom;
 
-multiline_attrs =
-    '[' , ? depth + 1 ? , attr_list , ? depth - 1 ? , ']';
+multiline_attrs = '[' , lfc, ? depth + 1 ? ,
+                  { attr_list , lfc , [ ? depth ? ] } ,
+                  ? depth - 1 ? , ']';
 
 attr_list = { attribute , whitespace };
 
