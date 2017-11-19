@@ -15,5 +15,3 @@ OBJECTS=$(BDIR)/parser/parser_log.o \
 
 $(BDIR)/parser/parser.a: $(OBJECTS)
 	$(AR) $(ARFLAGS) $@ $?
-
-PARSER_LIBS=$(BDIR)/parser/parser.a

@@ -18,5 +18,3 @@ OBJECTS=$(BDIR)/css/color_parse.o \
 
 $(BDIR)/css/css.a: $(OBJECTS)
 	$(AR) $(ARFLAGS) $@ $?
-
-CSS_LIBS=$(BDIR)/css/css.a

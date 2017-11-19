@@ -9,5 +9,3 @@ OBJECTS=$(BDIR)/sui/sui_parse.o \
 
 $(BDIR)/sui/sui.a: $(OBJECTS)
 	$(AR) $(ARFLAGS) $@ $?
-
-SUI_LIBS=$(BDIR)/sui/sui.a

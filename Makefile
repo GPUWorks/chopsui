@@ -22,6 +22,7 @@ include parser/Makefile
 include sui/Makefile
 include type/Makefile
 include util/Makefile
+include window/Makefile
 
 $(BDIR)/libchopsui.so: $(ARCHIVES)
 	$(LD) -shared $(LDFLAGS) -o $@ $^

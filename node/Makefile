@@ -20,5 +20,3 @@ OBJECTS=$(BDIR)/node/node_get_attr.o \
 
 $(BDIR)/node/node.a: $(OBJECTS)
 	$(AR) $(ARFLAGS) $@ $?
-
-NODE_LIBS=$(BDIR)/node/node.a
