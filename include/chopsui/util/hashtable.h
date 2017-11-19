@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+// TODO: yoink typedefs
 typedef struct {
 	unsigned int key;
 	void *value;
@@ -21,6 +22,7 @@ void *hashtable_get(sui_hashtable_t *table, const void *key);
 void *hashtable_set(sui_hashtable_t *table, const void *key, void *value);
 void *hashtable_del(sui_hashtable_t *table, const void *key);
 bool hashtable_contains(sui_hashtable_t *table, const void *key);
+// TODO: Persist unmolested keys and iterate with them too
 void hashtable_iter(sui_hashtable_t *table, void (*iter)(void *item, void *state), void *state);
 
 #endif

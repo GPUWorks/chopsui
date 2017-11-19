@@ -8,17 +8,16 @@
 #include <chopsui/type.h>
 #include <chopsui/css.h>
 
+struct sui_type;
+
 struct sui_node {
 	struct sui_node *parent;
-
+	struct sui_type *sui_type;
 	char *type;
 	char *id;
 	sui_set_t *classes;          // char *
 	sui_list_t *children;        // struct sui_node
 	sui_hashtable_t *attributes; // char *, char *
-
-	void *impl_state;
-	struct sui_type_impl *impl;
 };
 
 /**
@@ -91,5 +90,21 @@ int node_insert_child(struct sui_node *parent, struct sui_node *child, size_t in
  * Detaches this node from its parent.
  */
 void node_detach(struct sui_node *child);
+
+/**
+ * Adds the given sui_type_impl to the node's type. An example of where this is
+ * appropriate could be when a node is added to a container; the container might
+ * add a container-specific sui_type_impl that provides attributes used by the
+ * container to lay out its children. Situations where a particular kind of node
+ * will always have some types is better suited to type_impl_add (see type.h).
+ */
+void node_type_add_impl(struct sui_node *node, const struct sui_type_impl *impl);
+
+/**
+ * Removes the given sui_type_impl from the node's type. This would be
+ * appropriate, for example, when removing a type from a container implementing
+ * the pattern described in the documentation of node_type_add_impl.
+ */
+void node_type_remove_impl(struct sui_node *node, const struct sui_type_impl *impl);
 
 #endif

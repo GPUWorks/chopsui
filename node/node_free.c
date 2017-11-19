@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <chopsui/node.h>
+#include "node.h"
 
 static void free_attr_iter(void *val, void *_) {
 	free(val);
@@ -17,7 +18,11 @@ void node_free(struct sui_node *node) {
 		hashtable_iter(node->attributes, free_attr_iter, NULL);
 		hashtable_free(node->attributes);
 	}
-	if (node->impl && node->impl->free) {
-		node->impl->free(node);
+	struct sui_type *type = node->sui_type;
+	while (type) {
+		if (type->impl->free) {
+			type->impl->free(node);
+		}
+		type = type->next;
 	}
 }

@@ -13,12 +13,12 @@ struct sui_node *single_node;
 
 static void init_test_types() {
 	static struct sui_type_impl impl = { 0 };
-	set_impl_for_type("test", &impl);
-	set_impl_for_type("foo", &impl);
-	set_impl_for_type("bar", &impl);
-	set_impl_for_type("baz", &impl);
-	set_impl_for_type("zab", &impl);
-	set_impl_for_type("rab", &impl);
+	type_impl_register("test", &impl);
+	type_impl_register("foo", &impl);
+	type_impl_register("bar", &impl);
+	type_impl_register("baz", &impl);
+	type_impl_register("zab", &impl);
+	type_impl_register("rab", &impl);
 	single_node = sui_parse("test .class @id foo=bar", NULL);
 }
 

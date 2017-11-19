@@ -13,7 +13,10 @@ OBJECTS=$(BDIR)/node/node_get_attr.o \
 		$(BDIR)/node/node_find_descendants.o \
 		$(BDIR)/node/node_find_descendant.o \
 		$(BDIR)/node/node_find_ancestors.o \
-		$(BDIR)/node/node_find_ancestor.o
+		$(BDIR)/node/node_find_ancestor.o \
+		$(BDIR)/node/node_type_add_impl.o \
+		$(BDIR)/node/node_type_remove_impl.o \
+		$(BDIR)/node/node_initialize_types.o
 
 $(BDIR)/node/node.a: $(OBJECTS)
 	$(AR) $(ARFLAGS) $@ $?

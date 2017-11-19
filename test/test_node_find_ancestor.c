@@ -9,10 +9,10 @@ char *test_name = "node/node_find_ancestor(s)";
 
 static void init_test_types() {
 	static struct sui_type_impl impl = { 0 };
-	set_impl_for_type("foo", &impl);
-	set_impl_for_type("bar", &impl);
-	set_impl_for_type("baz", &impl);
-	set_impl_for_type("zab", &impl);
+	type_impl_register("foo", &impl);
+	type_impl_register("bar", &impl);
+	type_impl_register("baz", &impl);
+	type_impl_register("zab", &impl);
 }
 
 static int test_simple() {

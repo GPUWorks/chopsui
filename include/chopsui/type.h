@@ -1,10 +1,13 @@
 #ifndef _SUI_TYPE_H
 #define _SUI_TYPE_H
+#include <stdarg.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <chopsui/scalars.h>
 
 struct sui_node;
+
+// TODO: consider passing an errors_t to attr and child
 
 struct sui_type_impl {
 	/**
@@ -12,7 +15,8 @@ struct sui_type_impl {
 	 */
 	void (*init)(struct sui_node *node);
 	/**
-	 * Invoked when this node is destroyed.
+	 * Invoked when this node is destroyed. Don't free the node itself, just any
+	 * state you've associated with it.
 	 */
 	void (*free)(struct sui_node *node);
 	/**
@@ -22,7 +26,8 @@ struct sui_type_impl {
 	bool (*attr)(struct sui_node *node, const char *key,
 			const struct sui_scalar *value);
 	/**
-	 * Return the valid scalar types for this attribute, ORed together.
+	 * Return the valid scalar types for this attribute, ORed together. attr is
+	 * never called with a value that does not match this spec.
 	 */
 	uint64_t (*attr_spec)(struct sui_node *node, const char *key);
 	/**
@@ -41,7 +46,15 @@ struct sui_type_impl {
 	void (*child_removed)(struct sui_node *node, struct sui_node *child);
 };
 
-struct sui_type_impl *get_impl_for_type(const char *type);
-void set_impl_for_type(const char *type, struct sui_type_impl *impl);
+/**
+ * Adds a sui_type_impl that is automatically added to new nodes created of the
+ * specified type. The new impl is not added to existing nodes of this type.
+ */
+void type_impl_register(const char *type, const struct sui_type_impl *impl);
+
+/**
+ * Registers a type with many sui_type_impls. The last argument should be NULL.
+ */
+void type_impls_register(const char *type, ...);
 
 #endif

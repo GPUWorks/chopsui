@@ -3,26 +3,30 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+// Note: a scalar cannot be multiple types. This is a bitfield for the purpose
+// of expressing a set of valid types.
 enum scalar_type {
-	SCALAR_EMPTY,
-	SCALAR_INT,
-	SCALAR_FLOAT,
-	SCALAR_DPI,
-	SCALAR_EM,
-	SCALAR_REM,
-	SCALAR_PX,
-	SCALAR_PERCENT,
-	SCALAR_DEG,
-	SCALAR_RAD,
-	SCALAR_GRAD,
-	SCALAR_MS,
-	SCALAR_S,
-	SCALAR_HZ,
-	SCALAR_KHZ,
-	SCALAR_COLOR,
-	SCALAR_BOOL,
-	SCALAR_STR,
-	SCALAR_VOID,
+	SCALAR_EMPTY   = 0,
+	SCALAR_INT     = 1 << 1,
+	SCALAR_FLOAT   = 1 << 2,
+	SCALAR_DPI     = 1 << 3,
+	SCALAR_EM      = 1 << 4,
+	SCALAR_REM     = 1 << 5,
+	SCALAR_PX      = 1 << 6,
+	SCALAR_PERCENT = 1 << 7,
+	SCALAR_DEG     = 1 << 8,
+	SCALAR_RAD     = 1 << 9,
+	SCALAR_GRAD    = 1 << 10,
+	SCALAR_MS      = 1 << 11,
+	SCALAR_S       = 1 << 12,
+	SCALAR_HZ      = 1 << 13,
+	SCALAR_KHZ     = 1 << 14,
+	SCALAR_COLOR   = 1 << 15,
+	SCALAR_BOOL    = 1 << 16,
+	SCALAR_STR     = 1 << 17,
+	SCALAR_VOID    = 1 << 18,
+	// Keep last
+	SCALAR_ANY     = -1,
 };
 
 struct sui_scalar {

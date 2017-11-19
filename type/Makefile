@@ -1,6 +1,8 @@
 ARCHIVES+= $(BDIR)/type/type.a
 
-OBJECTS=$(BDIR)/type/impl.o
+OBJECTS=$(BDIR)/type/type_impl_register.o \
+		$(BDIR)/type/type_impls_register.o \
+		$(BDIR)/type/type_impl_map.o
 
 $(BDIR)/type/type.a: $(OBJECTS)
 	$(AR) $(ARFLAGS) $@ $?

@@ -46,6 +46,8 @@ static void push_indent(struct sui_parser_state *state,
 	}
 }
 
+bool node_initialize_types(struct sui_node *node);
+
 static void commit_type(void *_state, const char *str, enum string_type t) {
 	// TODO: validate characters used
 	struct node_state *state = _state;
@@ -54,16 +56,11 @@ static void commit_type(void *_state, const char *str, enum string_type t) {
 	} else {
 		state->node->type = strdup(str);
 		parser_log(state->pstate, "commit type='%s'", str);
-		struct sui_type_impl *impl =
-			get_impl_for_type(state->node->type);
-		if (!impl) {
+		// TODO: better error shuffling
+		if (!node_initialize_types(state->node)) {
 			parser_error(state->pstate,
 					"Unknown node type '%s'", state->node->type);
 			return;
-		}
-		state->node->impl = impl;
-		if (impl->init) {
-			impl->init(state->node);
 		}
 	}
 }
