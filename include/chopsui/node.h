@@ -107,4 +107,9 @@ void node_type_add_impl(struct sui_node *node, const struct sui_type_impl *impl)
  */
 void node_type_remove_impl(struct sui_node *node, const struct sui_type_impl *impl);
 
+/**
+ * Returns true if this node implements the given type.
+ */
+bool node_has_type(struct sui_node *node, const struct sui_type_impl *impl);
+
 #endif

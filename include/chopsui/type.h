@@ -27,13 +27,13 @@ struct sui_type_impl {
 	bool (*attr)(struct sui_node *node, const char *key,
 			const struct sui_scalar *value);
 	/**
-	 * Return the valid scalar types for this attribute, ORed together. attr is
-	 * never called with a value that does not match this spec.
+	 * Return the valid scalar types for this attribute, ORed together. Neither
+	 * attr nor attr_default are ever called with a value that does not match
+	 * this spec.
 	 */
 	uint64_t (*attr_spec)(struct sui_node *node, const char *key);
 	/**
-	 * Provide the default value for this attribute. Set the scalar type to
-	 * SCALAR_EMPTY to indicate an invalid attribute.
+	 * Provide the default value for this attribute.
 	 */
 	void (*attr_default)(const char *key, struct sui_scalar *value);
 	/**
