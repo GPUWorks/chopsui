@@ -7,11 +7,11 @@ sources:
   - https://git.sr.ht/~sircmpwn/chopsui
 tasks:
   - setup: |
-    mkdir chopsui/build-{gcc,clang}
-    cd chopsui/build-gcc
-    CC=gcc meson ..
-    cd ../build-clang
-    CC=clang meson ..
+      mkdir chopsui/build-{gcc,clang}
+      cd chopsui/build-gcc
+      CC=gcc meson ..
+      cd ../build-clang
+      CC=clang meson ..
   - gcc: |
       cd chopsui/build-gcc
       ninja
