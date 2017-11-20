@@ -3,10 +3,11 @@
 This is a **very** WIP library for creating user interfaces. There are no
 screenshots because it doesn't support rendering yet.
 
-    make
-    make check
-
-There is no `make install` yet. Edit `config.mk` if you want.
+    mkdir build
+    cd build
+    meson ..
+    ninja
+    ninja test
 
 ## Goals
 
