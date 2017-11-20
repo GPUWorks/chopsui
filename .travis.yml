@@ -8,9 +8,13 @@ compiler:
 
 arch:
   packages:
-    - gcc
+    - meson
+    - clang
+    - wayland
   script:
-    - make check
+    - meson build
+    - ninja -C build
+    - ninja test -C build
 
 script:
   - "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"

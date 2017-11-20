@@ -1,14 +1,22 @@
 image: archlinux
 packages:
+  - meson
   - clang
+  - wayland
 sources:
   - https://git.sr.ht/~sircmpwn/chopsui
 tasks:
+  - setup: |
+    mkdir chopsui/build-{gcc,clang}
+    cd chopsui/build-gcc
+    CC=gcc meson ..
+    cd ../build-clang
+    CC=clang meson ..
   - gcc: |
-      cd chopsui
-      make clean
-      make check CC=gcc
+      cd chopsui/build-gcc
+      ninja
+      ninja test
   - clang: |
-      cd chopsui
-      make clean
-      make check CC=clang
+      cd chopsui/build-clang
+      ninja
+      ninja test
