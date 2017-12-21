@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <wayland-client.h>
 #include <chopsui/type.h>
 #include <chopsui/node.h>

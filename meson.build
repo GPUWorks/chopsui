@@ -37,13 +37,13 @@ subdir('util')
 subdir('window')
 
 sui_libs = [
-		lib_sui_css,
-		lib_sui_node,
-		lib_sui_parser,
-		lib_sui_sui,
-		lib_sui_type,
-		lib_sui_util,
-		lib_sui_window,
+	lib_sui_css,
+	lib_sui_node,
+	lib_sui_parser,
+	lib_sui_sui,
+	lib_sui_type,
+	lib_sui_util,
+	lib_sui_window,
 ]
 
 lib_chopsui = library(
@@ -64,3 +64,4 @@ pkgconfig.generate(
 )
 
 subdir('test')
+subdir('demos')
