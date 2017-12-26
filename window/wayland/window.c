@@ -6,17 +6,14 @@
 #include <chopsui/node.h>
 #include <chopsui/util/log.h>
 #include <chopsui/window.h>
-
-struct wayland_window_state {
-	struct wl_display *wl_display;
-};
+#include "wayland.h"
 
 static void wayland_window_run(struct sui_node *node) {
 	assert(node_has_type(node, &wayland_native_window_type));
 	struct wayland_window_state *state =
 		node_get_attr(node, "chopsui::window::`wayland_window_state`")->data;
 	assert(state->wl_display = wl_display_connect(NULL));
-	// TODO: the rest
+	wayland_native_registry_poll(state);
 }
 
 struct native_window_impl native_window_impl = {

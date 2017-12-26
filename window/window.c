@@ -7,6 +7,7 @@
 #include <chopsui/type.h>
 #include <chopsui/util/log.h>
 #include <chopsui/window.h>
+#include "wayland.h"
 
 struct attr_spec spec[] = {
 	{

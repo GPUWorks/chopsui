@@ -16,7 +16,4 @@ void register_window_types();
  */
 void window_run(struct sui_node *node);
 
-/** Built-in native window implementations */
-extern struct sui_type_impl wayland_native_window_type;
-
 #endif
