@@ -5,6 +5,7 @@ lib_sui_util = static_library(
 		'hash.c',
 		'hashtable.c',
 		'list.c',
+        'log.c',
 		'set.c',
 		'string.c',
 		'utf8_chsize.c',

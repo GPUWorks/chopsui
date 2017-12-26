@@ -11,6 +11,10 @@ project(
 
 add_project_arguments('-Wno-unused-parameter', language: 'c')
 add_project_arguments(
+    '-DSUI_SRC_DIR="@0@"'.format(meson.source_root()),
+    language: 'c'
+)
+add_project_arguments(
 	'-I@0@'.format(meson.build_root()),
 	language: 'c',
 )

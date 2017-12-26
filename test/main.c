@@ -1,8 +1,18 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <chopsui/util/log.h>
 #include "test.h"
 
+static void log_noop(log_importance_t importance,
+		const char *fmt, va_list args) {
+	// This space intentionally left blank
+}
+
 int main(int argc, char **argv) {
+	if (!getenv("SUI_LOG")) {
+		sui_log_init(log_noop);
+	}
 	printf("%s", test_name);
 	int dots = 50 - strlen(test_name);
 	while (dots--) putchar('.');

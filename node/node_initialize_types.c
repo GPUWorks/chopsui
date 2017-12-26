@@ -9,6 +9,9 @@ bool type_impls_map(const char *type,
 static bool iter(const struct sui_type_impl *impl, void *data) {
 	struct sui_node *node = data;
 	node_type_add_impl(node, impl);
+	if (impl->init) {
+		impl->init(node);
+	}
 	return true;
 }
 

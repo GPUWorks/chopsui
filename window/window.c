@@ -5,6 +5,7 @@
 #include <chopsui/scalars.h>
 #include <chopsui/node.h>
 #include <chopsui/type.h>
+#include <chopsui/util/log.h>
 #include <chopsui/window.h>
 
 struct attr_spec spec[] = {
@@ -56,6 +57,7 @@ void register_window_types() {
 
 void window_run(struct sui_node *node) {
 	assert(node_has_type(node, &native_window_type));
+	sui_log(L_DEBUG, "Running chopsui window %p", node);
 	struct native_window_impl *impl =
 		node_get_attr(node, "chopsui::window::`native_window_impl`")->data;
 	impl->run(node);

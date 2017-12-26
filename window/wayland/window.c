@@ -4,6 +4,7 @@
 #include <wayland-client.h>
 #include <chopsui/type.h>
 #include <chopsui/node.h>
+#include <chopsui/util/log.h>
 #include <chopsui/window.h>
 
 struct wayland_window_state {
@@ -27,6 +28,7 @@ static void window_init(struct sui_node *node) {
 		.type = SCALAR_VOID,
 		.data = &native_window_impl
 	};
+	sui_log(L_DEBUG, "Initializing Wayland window");
 	node_set_attr(node, "chopsui::window::`native_window_impl`", &scalar);
 
 	struct wayland_window_state *state =

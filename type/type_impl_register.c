@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <chopsui/util/hashtable.h>
 #include <chopsui/util/hash.h>
+#include <chopsui/util/log.h>
 #include <chopsui/type.h>
 #include "type.h"
 
@@ -15,6 +16,7 @@ static void impl_map_init() {
 
 void type_impl_register(const char *type, const struct sui_type_impl *impl) {
 	impl_map_init();
+	sui_log(L_DEBUG, "Registering type impl %p for %s", impl, type);
 	struct sui_auto_impl *_impl = hashtable_get(type_impl_map, type);
 	if (!_impl) {
 		_impl = calloc(1, sizeof(struct sui_auto_impl));
