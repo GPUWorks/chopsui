@@ -8,6 +8,9 @@ lib_sui_window = static_library(
 	),
 	include_directories: [
 		sui_inc,
-		include_directories(['wayland/'])
+		include_directories([
+			'../gfx', # TODO: non-ideal
+			'wayland',
+		])
 	]
 )

@@ -11,8 +11,8 @@ project(
 
 add_project_arguments('-Wno-unused-parameter', language: 'c')
 add_project_arguments(
-    '-DSUI_SRC_DIR="@0@"'.format(meson.source_root()),
-    language: 'c'
+	'-DSUI_SRC_DIR="@0@"'.format(meson.source_root()),
+	language: 'c'
 )
 add_project_arguments(
 	'-I@0@'.format(meson.build_root()),
@@ -29,10 +29,15 @@ endif
 
 sui_inc = include_directories('include')
 
-# TODO: This should be optional
+egl = dependency('egl')
+glesv2 = dependency('glesv2')
+# TODO: Wayland stuff should be optional
+xkbcommon = dependency('xkbcommon')
 wayland_client = dependency('wayland-client')
+wayland_egl = dependency('wayland-egl')
 
 subdir('css')
+subdir('gfx')
 subdir('node')
 subdir('parser')
 subdir('sui')
@@ -42,6 +47,7 @@ subdir('window')
 
 sui_libs = [
 	lib_sui_css,
+	lib_sui_gfx,
 	lib_sui_node,
 	lib_sui_parser,
 	lib_sui_sui,

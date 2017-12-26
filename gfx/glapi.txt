@@ -1,0 +1,4 @@
+eglGetPlatformDisplayEXT
+eglCreatePlatformWindowSurfaceEXT
+-eglBindWaylandDisplayWL
+-eglUnbindWaylandDisplayWL

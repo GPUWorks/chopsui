@@ -6,6 +6,7 @@
 #include <chopsui/node.h>
 #include <chopsui/util/log.h>
 #include <chopsui/window.h>
+#include "gfx/egl.h"
 #include "wayland.h"
 
 static void wayland_window_run(struct sui_node *node) {
@@ -14,6 +15,8 @@ static void wayland_window_run(struct sui_node *node) {
 		node_get_attr(node, "chopsui::window::`wayland_window_state`")->data;
 	assert(state->wl_display = wl_display_connect(NULL));
 	wayland_native_registry_poll(state);
+	sui_egl_init(&state->egl, EGL_PLATFORM_WAYLAND_EXT,
+		state->wl_display, NULL, WL_SHM_FORMAT_ARGB8888);
 }
 
 struct native_window_impl native_window_impl = {

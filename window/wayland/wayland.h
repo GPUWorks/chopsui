@@ -3,11 +3,15 @@
 #include <wayland-client.h>
 #include <chopsui/node.h>
 #include <chopsui/type.h>
+#include "gfx/egl.h"
 
 struct wayland_window_state {
 	struct sui_node *node;
+
 	struct wl_display *wl_display;
 	struct wl_registry *wl_registry;
+
+	struct sui_egl egl;
 };
 
 extern struct sui_type_impl wayland_native_window_type;
