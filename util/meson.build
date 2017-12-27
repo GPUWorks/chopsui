@@ -6,6 +6,7 @@ lib_sui_util = static_library(
 		'hashtable.c',
 		'list.c',
         'log.c',
+		'os-compatibility.c',
 		'set.c',
 		'string.c',
 		'utf8_chsize.c',
