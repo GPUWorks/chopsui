@@ -1,10 +1,12 @@
 subdir('wayland')
 
-lib_sui_window = static_library(
-	'sui_window',
+lib_sui_host = static_library(
+	'sui_host',
 	files(
+		'host.c',
 		'window.c',
 		# TODO: Configure windowing backends at build-time
+		'wayland/host.c',
 		'wayland/window.c',
 		'wayland/registry.c',
 	),

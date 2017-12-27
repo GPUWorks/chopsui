@@ -39,22 +39,22 @@ wayland_protos = dependency('wayland-protocols')
 
 subdir('css')
 subdir('gfx')
+subdir('host')
 subdir('node')
 subdir('parser')
 subdir('sui')
 subdir('type')
 subdir('util')
-subdir('window')
 
 sui_libs = [
 	lib_sui_css,
 	lib_sui_gfx,
+	lib_sui_host,
 	lib_sui_node,
 	lib_sui_parser,
 	lib_sui_sui,
 	lib_sui_type,
 	lib_sui_util,
-	lib_sui_window,
 ]
 
 lib_chopsui = library(

@@ -2,11 +2,11 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>
-#include <chopsui/scalars.h>
+#include <chopsui/host.h>
 #include <chopsui/node.h>
+#include <chopsui/scalars.h>
 #include <chopsui/type.h>
 #include <chopsui/util/log.h>
-#include <chopsui/window.h>
 #include "wayland.h"
 
 struct attr_spec spec[] = {
@@ -46,20 +46,3 @@ struct sui_type_impl native_window_type = {
 	.attr_default = native_attr_default,
 	.child = native_child,
 };
-
-// TODO: Figure out a design that allows for multiple windows in one process
-// Probably via a "host" interface of some sort
-
-void register_window_types() {
-	type_impl_register("window", &native_window_type);
-	// TODO: detect platform and register appropriate native window type
-	type_impl_register("window", &wayland_native_window_type);
-}
-
-void window_run(struct sui_node *node) {
-	assert(node_has_type(node, &native_window_type));
-	sui_log(L_DEBUG, "Running chopsui window %p", node);
-	struct native_window_impl *impl =
-		node_get_attr(node, "chopsui::window::`native_window_impl`")->data;
-	impl->run(node);
-}
