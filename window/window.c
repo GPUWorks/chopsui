@@ -32,8 +32,8 @@ static uint64_t native_attr_spec(struct sui_node *node, const char *key) {
 	return attr_spec_attr_spec(&spec, key);
 }
 
-static void native_attr_default(const char *key, struct sui_scalar *value) {
-	attr_spec_attr_default(&spec, key, value);
+static bool native_attr_default(const char *key, struct sui_scalar *value) {
+	return attr_spec_attr_default(&spec, key, value);
 }
 
 static bool native_child(struct sui_node *parent, struct sui_node *child) {

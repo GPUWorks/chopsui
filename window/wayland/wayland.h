@@ -9,6 +9,7 @@
 struct wayland_window_state {
 	struct sui_node *node;
 
+	/* TODO: everything from here: */
 	struct wl_display *wl_display;
 	struct wl_registry *wl_registry;
 	struct wl_compositor *wl_compositor;
@@ -17,6 +18,11 @@ struct wayland_window_state {
 	struct zxdg_shell_v6 *xdg_shell;
 
 	struct sui_egl egl;
+	/* to here should be moved to host */
+
+	struct wl_surface *wl_surface;
+	struct xdg_shell_v6_surface *xdg_surface;
+	struct xdg_shell_v6_toplevel *xdg_toplevel;
 };
 
 extern struct sui_type_impl wayland_native_window_type;

@@ -33,9 +33,10 @@ struct sui_type_impl {
 	 */
 	uint64_t (*attr_spec)(struct sui_node *node, const char *key);
 	/**
-	 * Provide the default value for this attribute.
+	 * Provide the default value for this attribute, or return false if you
+	 * don't have one.
 	 */
-	void (*attr_default)(const char *key, struct sui_scalar *value);
+	bool (*attr_default)(const char *key, struct sui_scalar *value);
 	/**
 	 * Invoked when a child is added to this node. Return false to prevent the
 	 * child from being added and raise an error.
@@ -73,15 +74,15 @@ struct attr_spec {
  * Implements sui_type_impl.attr_spec using the given attr_specs.
  */
 #define attr_spec_attr_spec(spec, key) \
-	_attr_spec_attr_spec(spec, sizeof(spec) / sizeof((*spec)[0]), key)
+	_attr_spec_attr_spec(spec, sizeof(*spec) / sizeof(((*spec)[0])), key)
 uint64_t _attr_spec_attr_spec(const struct attr_spec (*spec)[], size_t len,
 		const char *key);
 /**
  * Implements sui_type_impl.attr_default using the given attr_specs.
  */
 #define attr_spec_attr_default(spec, key, value) \
-	_attr_spec_attr_default(spec, sizeof(spec) / sizeof(*spec), key, value)
-void _attr_spec_attr_default(const struct attr_spec (*spec)[], size_t len,
+	_attr_spec_attr_default(spec, sizeof(*spec) / sizeof(((*spec)[0])), key, value)
+bool _attr_spec_attr_default(const struct attr_spec (*spec)[], size_t len,
 		const char *key, struct sui_scalar *value);
 
 #endif
