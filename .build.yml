@@ -3,6 +3,9 @@ packages:
   - meson
   - clang
   - wayland
+  - wayland-protocols
+  - mesa
+  - libxkbcommon
 sources:
   - https://git.sr.ht/~sircmpwn/chopsui
 tasks:
