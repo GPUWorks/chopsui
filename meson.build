@@ -35,6 +35,7 @@ glesv2 = dependency('glesv2')
 xkbcommon = dependency('xkbcommon')
 wayland_client = dependency('wayland-client')
 wayland_egl = dependency('wayland-egl')
+wayland_protos = dependency('wayland-protocols')
 
 subdir('css')
 subdir('gfx')

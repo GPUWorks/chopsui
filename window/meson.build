@@ -1,3 +1,5 @@
+subdir('wayland')
+
 lib_sui_window = static_library(
 	'sui_window',
 	files(
@@ -12,5 +14,6 @@ lib_sui_window = static_library(
 			'../gfx', # TODO: non-ideal
 			'wayland',
 		])
-	]
+	],
+	dependencies: [sui_protos]
 )
