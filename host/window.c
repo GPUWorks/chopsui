@@ -19,12 +19,12 @@ struct attr_spec spec[] = {
 		// TODO: Invalidate children when these change
 		.key = "width",
 		.spec = SCALAR_INT,
-		.value = { .type = SCALAR_INT, .ival = -1 }
+		.value = { .type = SCALAR_INT, .ival = 640 }
 	},
 	{
 		.key = "height",
 		.spec = SCALAR_INT,
-		.value = { .type = SCALAR_INT, .ival = -1 }
+		.value = { .type = SCALAR_INT, .ival = 480 }
 	},
 };
 

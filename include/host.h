@@ -14,4 +14,8 @@ extern struct sui_host *active_host;
 
 extern struct sui_type_impl native_window_type;
 
+struct sui_window_impl {
+	void (*show)(struct sui_host *host, struct sui_node *node);
+};
+
 #endif

@@ -150,8 +150,8 @@ void sui_egl_finish(struct sui_egl *egl) {
 }
 
 EGLSurface sui_egl_create_surface(struct sui_egl *egl, void *window) {
-	EGLSurface surf = eglCreatePlatformWindowSurfaceEXT(egl->display, egl->config,
-		window, NULL);
+	EGLSurface surf = eglCreatePlatformWindowSurfaceEXT(
+			egl->display, egl->config, window, NULL);
 	if (surf == EGL_NO_SURFACE) {
 		sui_log(L_ERROR, "Failed to create EGL surface: %s", egl_error());
 		return EGL_NO_SURFACE;

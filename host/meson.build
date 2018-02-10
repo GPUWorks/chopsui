@@ -17,5 +17,11 @@ lib_sui_host = static_library(
 			'wayland',
 		])
 	],
-	dependencies: [sui_protos]
+	dependencies: [
+		sui_protos,
+
+		egl,
+		glesv2,
+		wayland_egl,
+	]
 )

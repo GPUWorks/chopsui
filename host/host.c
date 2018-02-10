@@ -17,3 +17,10 @@ struct sui_host *sui_host_initialize() {
 void sui_host_run(struct sui_host *host) {
 	host->impl->run(host);
 }
+
+void sui_host_show(struct sui_host *host, struct sui_node *window) {
+	const struct sui_scalar *_impl = node_get_attr(window,
+			"chopsui::window::`window_impl`");
+	struct sui_window_impl *impl = _impl->data;
+	impl->show(host, window);
+}

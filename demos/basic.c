@@ -4,9 +4,8 @@
 
 int main() {
 	struct sui_host *host = sui_host_initialize();
-	// TODO: We probably want a window_show or something so we can have windows
-	// in memory that are not running on the host
-	sui_parse("window title='sui demo'", NULL);
+	struct sui_node *window = sui_parse("window title='sui demo'", NULL);
+	sui_host_show(host, window);
 	sui_host_run(host);
 	return 0;
 }
