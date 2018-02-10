@@ -129,10 +129,10 @@ bool sui_egl_init(struct sui_egl *egl, EGLenum platform, void *remote_display,
 	eglMakeCurrent(egl->display, EGL_NO_SURFACE, EGL_NO_SURFACE, egl->context);
 	egl->egl_exts = eglQueryString(egl->display, EGL_EXTENSIONS);
 	egl->gl_exts = (const char*) glGetString(GL_EXTENSIONS);
-	sui_log(L_INFO, "Using EGL %d.%d", (int)major, (int)minor);
-	sui_log(L_INFO, "Supported EGL extensions: %s", egl->egl_exts);
-	sui_log(L_INFO, "Using %s", glGetString(GL_VERSION));
-	sui_log(L_INFO, "Supported OpenGL ES extensions: %s", egl->gl_exts);
+	sui_log(L_DEBUG, "Using EGL %d.%d", (int)major, (int)minor);
+	sui_log(L_DEBUG, "Supported EGL extensions: %s", egl->egl_exts);
+	sui_log(L_DEBUG, "Using %s", glGetString(GL_VERSION));
+	sui_log(L_DEBUG, "Supported OpenGL ES extensions: %s", egl->gl_exts);
 	return true;
 
 error:
