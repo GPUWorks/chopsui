@@ -68,10 +68,24 @@ static struct zxdg_surface_v6_listener xdg_surface_listener = {
 
 static void xdg_toplevel_handle_configure(void *data, struct zxdg_toplevel_v6 *xdg_toplevel,
 		int32_t width, int32_t height, struct wl_array *states) {
-	sui_log(L_DEBUG, "xdg toplevel configure");
+	struct sui_wayland_window *state = data;
+	assert(state && state->xdg_toplevel == xdg_toplevel);
+	if (width == 0 && height == 0) {
+		return;
+	}
+	// loop over states for maximized etc?
+	wl_egl_window_resize(state->egl_window, width, height, 0, 0);
+	struct sui_scalar dim = {
+		.type = SCALAR_INT,
+		.ival = width,
+	};
+	node_set_attr(state->node, "width", &dim);
+	dim.ival = height;
+	node_set_attr(state->node, "height", &dim);
 }
 
-static void xdg_toplevel_handle_close(void *data, struct zxdg_toplevel_v6 *xdg_toplevel) {
+static void xdg_toplevel_handle_close(void *data,
+		struct zxdg_toplevel_v6 *xdg_toplevel) {
 	sui_log(L_DEBUG, "xdg toplevel close");
 	// TODO
 }
