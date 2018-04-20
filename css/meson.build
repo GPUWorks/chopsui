@@ -2,6 +2,7 @@ lib_sui_css = static_library(
 	'sui_css',
 	files(
 		'color_parse.c',
+		'css_load.c',
 		'css_parse.c',
 		'css_parse_ch.c',
 		'keyframes_free.c',
@@ -14,6 +15,7 @@ lib_sui_css = static_library(
 		'selector_free.c',
 		'selector_parse.c',
 		'selector_print.c',
+		'style_type.c',
 		'style_rule_free.c',
 		'stylesheet_free.c',
 	),

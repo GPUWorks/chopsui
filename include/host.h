@@ -18,4 +18,7 @@ struct sui_window_impl {
 	void (*show)(struct sui_host *host, struct sui_node *node);
 };
 
+// Types automatically registered by the host
+void style_type_register();
+
 #endif

@@ -11,6 +11,10 @@ struct sui_host *sui_host_initialize() {
 	// TODO: detect platform and register only the most appropriate native
 	// window type
 	type_impl_register("window", &wayland_native_window_type);
+
+	// Register built-in types
+	style_type_register();
+	
 	return active_host = wayland_host_initialize();
 }
 

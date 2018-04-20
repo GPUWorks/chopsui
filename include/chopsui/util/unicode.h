@@ -2,6 +2,8 @@
 #define _SUI_UNICODE_H
 #include <stddef.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <unistd.h>
 
 // Technically UTF-8 supports up to 6 byte codepoints, but Unicode itself
 // doesn't really bother with more than 4.
@@ -28,5 +30,17 @@ int utf8_size(const char *str);
  * Returns the size of a UTF-8 character
  */
 size_t utf8_chsize(uint32_t ch);
+
+/**
+ * Read the next UTF-8 character from a file descriptor, returns bytes read or
+ * -1 on error.
+ */
+ssize_t utf8_read(int fd, uint32_t *ch);
+
+/**
+ * Read the next UTF-8 character from a file stream, returns bytes read or -1 on
+ * error.
+ */
+ssize_t utf8_fread(FILE *f, uint32_t *ch);
 
 #endif
