@@ -3,5 +3,5 @@
 #include <chopsui/util/unicode.h>
 
 ssize_t utf8_fread(FILE *f, uint32_t *ch) {
-	return utf8_read(fileno(f), ch);;
+	return utf8_read(fileno(f), ch);
 }

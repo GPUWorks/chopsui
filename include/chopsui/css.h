@@ -125,6 +125,7 @@ struct stylesheet *css_load(FILE *source, errors_t **errs);
 void stylesheet_free(struct stylesheet *stylesheet);
 
 struct style_context;
+struct sui_node;
 
 struct style_context *style_get_context(struct sui_node *node);
 const struct sui_scalar *style_get_attr(struct style_context *ctx,
