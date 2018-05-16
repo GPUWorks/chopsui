@@ -14,7 +14,8 @@ foreach t : tests
 		t,
 		['main.c', t + '.c'],
 		link_with: [lib_chopsui],
-		include_directories: sui_inc
+		include_directories: sui_inc,
+		c_args: ['-Wno-unused-function'],
 	)
 	test(t, _test)
 endforeach

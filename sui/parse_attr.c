@@ -23,6 +23,7 @@ static void commit_key(void *_state, const char *str, enum string_type t) {
 	// TODO: validate characters used
 	struct attr_state *state = _state;
 	if (str) {
+		parser_log(state->pstate, "key: '%s'", str);
 		state->key = strdup(str);
 	}
 }
@@ -33,6 +34,7 @@ static void commit_val(void *_state, const char *str, enum string_type type) {
 	if (!str) {
 		parser_error(state->pstate, "Unspecified attribute value");
 	}
+	parser_log(state->pstate, "value: '%s'", str);
 	struct sui_scalar value;
 	if (type == STRING_LITERAL) {
 		if (!scalar_parse(str, &value)) {

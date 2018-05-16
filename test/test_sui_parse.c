@@ -126,8 +126,8 @@ static int test_attrs() {
 	errors_t *err = NULL;
 	struct sui_node *node = sui_parse("test\n"
 		"\ttest foo=10\n"
-		"\ttest foo=10 baz\n"
-		"\ttest foo='string literal'", &err);
+		"\ttest foo='string literal'\n"
+		"\ttest foo=10 baz\n", &err);
 
 	assert(!err);
 	assert(node->children);
@@ -140,7 +140,7 @@ static int test_attrs() {
 	assert(s->type == SCALAR_INT);
 	assert(s->ival == 10);
 
-	n = node->children->items[1];
+	n = node->children->items[2];
 	assert(n->attributes->bucket_count);
 	s = hashtable_get(n->attributes, "foo");
 	assert(s);
@@ -150,7 +150,7 @@ static int test_attrs() {
 	assert(s);
 	assert(s->type == SCALAR_EMPTY);
 
-	n = node->children->items[2];
+	n = node->children->items[1];
 	assert(n->attributes->bucket_count);
 	s = hashtable_get(n->attributes, "foo");
 	assert(s);

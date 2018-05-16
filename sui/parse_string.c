@@ -47,12 +47,15 @@ void parse_string(struct parser_state *pstate, uint32_t ch) {
 		state->str = str_create();
 		switch (ch) {
 		case '"':
+			parser_log(pstate, "parsing double quoted string");
 			state->type = STRING_DOUBLE_QUOTE;
 			return;
 		case '\'':
+			parser_log(pstate, "parsing single quoted string");
 			state->type = STRING_SINGLE_QUOTE;
 			return;
 		default:
+			parser_log(pstate, "parsing literal string");
 			state->type = STRING_LITERAL;
 			break;
 		}
@@ -71,8 +74,10 @@ void parse_string(struct parser_state *pstate, uint32_t ch) {
 	}
 
 	if (commit) {
+		if (state->type == STRING_LITERAL) {
+			parser_push_ch(pstate, ch);
+		}
 		parser_pop(pstate);
-		parser_push_ch(pstate, ch);
 	} else {
 		str_append_ch(state->str, ch);
 	}
