@@ -85,7 +85,7 @@ static void commit_class(void *_state, const char *str, enum string_type t) {
 
 static void commit_attrib(void *_state, const char *key, void *val) {
 	struct node_state *state = _state;
-	hashtable_set(state->node->attributes, key, val);
+	node_set_attr(state->node, key, val);
 	parser_log(state->pstate, "commit attribute '%s'", key);
 }
 
