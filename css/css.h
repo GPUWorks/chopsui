@@ -7,6 +7,7 @@ struct style_context {
 	size_t refs;
 };
 
+struct style_context *style_get_context(struct sui_node *node);
 void add_style_context(struct sui_node *node, struct stylesheet *stylesheet);
 void remove_style_context(struct sui_node *node);
 

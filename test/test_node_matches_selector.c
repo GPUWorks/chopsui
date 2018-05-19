@@ -5,8 +5,6 @@
 #include <chopsui/sui.h>
 #include "test.h"
 
-bool node_matches_selector(struct sui_node *node, struct selector *selector);
-
 char *test_name = "node/node_matches_selector";
 
 struct sui_node *single_node;

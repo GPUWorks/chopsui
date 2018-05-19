@@ -15,12 +15,12 @@ lib_sui_css = static_library(
 		'selector_free.c',
 		'selector_parse.c',
 		'selector_print.c',
-		'style_rule_free.c',
-		'stylesheet_free.c',
-
 		'style_context_type.c',
+		'style_get_attr.c',
 		'style_get_context.c',
+		'style_rule_free.c',
 		'style_type.c',
+		'stylesheet_free.c',
 	),
 	include_directories: sui_inc
 )

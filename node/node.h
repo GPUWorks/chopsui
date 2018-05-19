@@ -9,6 +9,4 @@ struct sui_type {
 	struct sui_type *next;
 };
 
-bool node_matches_selector(struct sui_node *node, struct selector *selector);
-
 #endif

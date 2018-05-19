@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <chopsui/css.h>
 #include <chopsui/host.h>
@@ -15,8 +16,9 @@ int main() {
 	struct sui_node *box = node_find_descendant(
 			window, selector_parse("box"));
 	assert(box);
-	struct style_context *ctx = style_get_context(box);
-	assert(ctx);
+	const struct sui_scalar *color = style_get_attr(box, "color");
+	assert(color);
+	printf("box color: %06lX\n", color->uval);
 	sui_host_show(host, window);
 	sui_host_run(host);
 	return 0;

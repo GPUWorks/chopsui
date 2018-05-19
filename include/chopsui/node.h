@@ -50,6 +50,12 @@ void node_remove_class(struct sui_node *node, const char *name);
 void node_free(struct sui_node *node);
 
 /**
+ * Returns true if the specified node matches the specified CSS selector.
+ */
+bool node_matches_selector(const struct sui_node *node,
+		const struct selector *selector);
+
+/**
  * Finds the first ancestor of node that matches the provided CSS selector.
  */
 struct sui_node *node_find_ancestor(struct sui_node *node,

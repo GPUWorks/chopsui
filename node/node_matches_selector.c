@@ -5,7 +5,8 @@
 #include <chopsui/css.h>
 #include "node.h"
 
-bool node_matches_selector(struct sui_node *node, struct selector *selector) {
+bool node_matches_selector(const struct sui_node *node,
+		const struct selector *selector) {
 	assert(node && selector);
 	struct sui_node *parent;
 	while (selector) {

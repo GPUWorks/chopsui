@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <chopsui/util/list.h>
+#include <chopsui/util/log.h>
 #include <chopsui/util/errors.h>
 
 const char *append_error(errors_t **errs, const char *fmt, ...) {

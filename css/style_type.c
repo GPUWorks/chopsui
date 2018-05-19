@@ -24,7 +24,7 @@ static bool style_attr(struct sui_node *node, const char *key,
 			// TODO: Enforce this via attr_spec
 			return false;
 		}
-		errors_t *errs;
+		errors_t *errs = NULL;
 		FILE *f = fopen(value->str, "r");
 		if (!f) {
 			sui_log(L_ERROR, "style node: Failed to open %s", value->str);
@@ -61,15 +61,10 @@ static void style_child_removed(
 	remove_style_context(child);
 }
 
-static void style_init(struct sui_node *node) {
-	sui_log(L_DEBUG, "init");
-}
-
 static const struct sui_type_impl style_type_impl = {
 	.attr = style_attr,
 	.child = style_child,
 	.child_removed = style_child_removed,
-	.init = style_init,
 };
 
 void style_type_register() {
