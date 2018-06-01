@@ -10,6 +10,7 @@ lib_sui_gfx = static_library(
 	'sui_gfx',
 	files(
 		'egl.c',
+		'render_node.c',
 	),
 	glapi[0],
 	glapi[1],

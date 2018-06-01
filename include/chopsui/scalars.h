@@ -31,7 +31,7 @@ enum scalar_type {
 	SCALAR_ROTATION = SCALAR_DEG | SCALAR_RAD | SCALAR_GRAD,
 	SCALAR_TIME = SCALAR_S | SCALAR_MS,
 	SCALAR_FREQ = SCALAR_HZ | SCALAR_KHZ,
-	SCALAR_ANY     = -1,
+	SCALAR_ANY  = -1,
 };
 
 struct sui_scalar {

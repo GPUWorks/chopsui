@@ -19,6 +19,7 @@ struct sui_window_impl {
 };
 
 // Types automatically registered by the host
-void style_type_register();
+void style_type_register(void);
+void render_node_type_register(void);
 
 #endif
