@@ -31,11 +31,22 @@ sui_inc = include_directories('include')
 
 egl = dependency('egl')
 glesv2 = dependency('glesv2')
+koio = dependency('koio')
 # TODO: Wayland stuff should be optional
 xkbcommon = dependency('xkbcommon')
 wayland_client = dependency('wayland-client')
 wayland_egl = dependency('wayland-egl')
 wayland_protos = dependency('wayland-protocols')
+
+sui_deps = [
+	egl,
+	glesv2,
+	koio,
+	xkbcommon,
+	wayland_client,
+	wayland_egl,
+	wayland_protos
+]
 
 subdir('css')
 subdir('gfx')
@@ -63,6 +74,12 @@ lib_chopsui = library(
 	dependencies: [wayland_client],
 	include_directories: sui_inc,
 	install: true,
+)
+
+chopsui = declare_dependency(
+	link_with: lib_chopsui,
+	dependencies: sui_deps,
+	include_directories: sui_inc,
 )
 
 pkgconfig = import('pkgconfig')

@@ -1,0 +1,4 @@
+# vim: ft=conf noet ts=2 sw=2 :
+window title='sui basic demo'
+	style src='//style.css'
+		box

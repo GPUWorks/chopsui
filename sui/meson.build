@@ -4,6 +4,7 @@ lib_sui_sui = static_library(
 		'parse_attr.c',
 		'parse_node.c',
 		'parse_string.c',
+		'sui_load.c',
 		'sui_node_create.c',
 		'sui_parse.c',
 		'sui_parse_ch.c',

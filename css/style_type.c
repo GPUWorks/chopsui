@@ -1,6 +1,6 @@
 #include <assert.h>
 #include <string.h>
-#include <stdio.h>
+#include <koio.h>
 #include <chopsui/css.h>
 #include <chopsui/node.h>
 #include <chopsui/scalars.h>
@@ -25,7 +25,7 @@ static bool style_attr(struct sui_node *node, const char *key,
 			return false;
 		}
 		errors_t *errs = NULL;
-		FILE *f = fopen(value->str, "r");
+		FILE *f = ko_fopen(value->str, "r");
 		if (!f) {
 			sui_log(L_ERROR, "style node: Failed to open %s", value->str);
 			return false;

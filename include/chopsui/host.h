@@ -11,7 +11,7 @@ struct sui_node;
  *
  * The host is a global, you cannot have several of them at once.
  */
-struct sui_host *sui_host_initialize();
+struct sui_host *sui_host_initialize(const char *argv_0);
 
 /**
  * Runs the host. This does not return until you call sui_host_terminate.

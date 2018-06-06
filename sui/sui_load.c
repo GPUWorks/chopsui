@@ -1,0 +1,38 @@
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <chopsui/sui.h>
+#include <chopsui/node.h>
+#include <chopsui/util/errors.h>
+#include <chopsui/util/unicode.h>
+#include "subparser.h"
+
+struct sui_node *sui_load(FILE *source, errors_t **errs) {
+	struct sui_parser_state sui_state = {
+		.root = NULL,
+		.depth = 0,
+		.width = -1,
+		.indent = INDENT_UNKNOWN
+	};
+
+	struct parser_state state;
+	memset(&state, 0, sizeof(state));
+	state.errs = errs;
+	state.data = &sui_state;
+	parser_init(&state, sui_parse_ch);
+	push_node_parser(&state, NULL);
+
+	uint32_t ch;
+	while (utf8_fread(source, &ch) > 0) {
+		parse_ch(&state, ch);
+	}
+
+	parser_cleanup(&state);
+
+	if (!sui_state.root) {
+		parser_error(&state, "No valid nodes found");
+	}
+
+	return sui_state.root;
+}

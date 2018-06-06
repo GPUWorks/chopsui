@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <koio.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <chopsui/css.h>
@@ -33,14 +34,14 @@ static struct sui_type_impl box_impl = {
 	.init = box_init,
 };
 
-int main() {
+void koio_load_assets(void);
+
+int main(int argc, char **argv) {
+	koio_load_assets();
 	type_impl_register("box", &box_impl);
 	type_impl_register("box", &render_node_impl);
-	struct sui_host *host = sui_host_initialize();
-	struct sui_node *window = sui_parse(
-			"window title='sui demo'\n"
-			"\tstyle src='style.css'\n"
-			"\t\tbox color=red", NULL);
+	struct sui_host *host = sui_host_initialize(argv[0]);
+	struct sui_node *window = sui_load(ko_fopen("//window.sui", "r"), NULL);
 	sui_host_show(host, window);
 	sui_host_run(host);
 	return 0;

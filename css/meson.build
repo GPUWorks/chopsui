@@ -22,5 +22,6 @@ lib_sui_css = static_library(
 		'style_type.c',
 		'stylesheet_free.c',
 	),
-	include_directories: sui_inc
+	include_directories: sui_inc,
+	dependencies: [koio]
 )
