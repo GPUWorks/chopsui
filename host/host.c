@@ -1,4 +1,5 @@
 #include <chopsui/host.h>
+#include <chopsui/render_node.h>
 #include <chopsui/type.h>
 #include "wayland/wayland.h"
 #include "host.h"
@@ -11,6 +12,7 @@ struct sui_host *sui_host_initialize() {
 	// TODO: detect platform and register only the most appropriate native
 	// window type
 	type_impl_register("window", &wayland_native_window_type);
+	type_impl_register("window", &render_node_impl);
 
 	// Register built-in types
 	style_type_register();

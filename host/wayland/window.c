@@ -7,8 +7,9 @@
 #include <wayland-client.h>
 #include <wayland-egl.h>
 #include <chopsui/host.h>
-#include <chopsui/type.h>
 #include <chopsui/node.h>
+#include <chopsui/render_node.h>
+#include <chopsui/type.h>
 #include <chopsui/util/log.h>
 #include <GLES2/gl2.h>
 #include "gfx/egl.h"
@@ -26,20 +27,16 @@ static void surface_frame_callback(void *data, struct wl_callback *cb,
 	struct timespec now;
 	clock_gettime(CLOCK_MONOTONIC, &now);
 
-	// TEMPORARY: TODO Render children
-	long ms = (now.tv_sec - state->last_frame.tv_sec) * 1000 +
-		(now.tv_nsec - state->last_frame.tv_nsec) / 1000000;
-	glClearColor(state->color[0], state->color[1], state->color[2], 1.0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	int inc = (state->dec + 1) % 3;
-	state->color[inc] += ms / 2000.0f;
-	state->color[state->dec] -= ms / 2000.0f;
-	if (state->color[state->dec] < 0.0f) {
-		state->color[inc] = 1.0f;
-		state->color[state->dec] = 0.0f;
-		state->dec = inc;
-	}
-	// /TEMPORARY
+	// TODO: Only request/render frames if the child is invalidated
+	// TODO: Damage
+
+	const struct sui_scalar *_child =
+		node_get_attr(state->node, window_renderable_child_attr);
+	assert("Window has no renderable child" && _child);
+	struct sui_node *child = _child->data;
+	render_node_render(child,
+			node_get_attr(state->node, "width")->ival,
+			node_get_attr(state->node, "height")->ival);
 
 	state->frame_callback = wl_surface_frame(state->wl_surface);
 	wl_callback_add_listener(state->frame_callback, &frame_listener, state);
@@ -138,9 +135,6 @@ static void window_show(struct sui_host *_host, struct sui_node *node) {
 			node_get_attr(node, "height")->ival);
 	glClearColor(0, 0, 0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
-	state->color[0] = 1.0;
-	state->color[1] = 0;
-	state->color[2] = 0;
 
 	state->frame_callback = wl_surface_frame(state->wl_surface);
 	wl_callback_add_listener(state->frame_callback, &frame_listener, state);

@@ -11,7 +11,6 @@ struct named_color {
 
 struct named_color colors[] = {
 	{ "aqua", 0x00FFFF },
-	{ "blue", 0x0000FF },
 	{ "aliceblue", 0xF0F8FF },
 	{ "antiquewhite", 0xFAEBD7 },
 	{ "aquamarine", 0x7FFFD4 },
@@ -20,6 +19,7 @@ struct named_color colors[] = {
 	{ "bisque", 0xFFE4C4 },
 	{ "black", 0x000000 },
 	{ "blanchedalmond", 0xFFEBCD },
+	{ "blue", 0x0000FF },
 	{ "blueviolet", 0x8A2BE2 },
 	{ "brown", 0xA52A2A },
 	{ "burlywood", 0xDEB887 },

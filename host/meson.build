@@ -19,6 +19,7 @@ lib_sui_host = static_library(
 	],
 	dependencies: [
 		sui_protos,
+		sui_gfx,
 
 		egl,
 		glesv2,

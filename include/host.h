@@ -2,6 +2,8 @@
 #define _SUI_HOST_INTERNAL_H
 #include <chopsui/node.h>
 
+extern const char *window_renderable_child_attr;
+
 struct native_host_impl {
 	void (*run)(struct sui_host *host);
 };

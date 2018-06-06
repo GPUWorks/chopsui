@@ -30,8 +30,6 @@ struct sui_wayland_window {
 	void *egl_surface;
 	struct wl_callback *frame_callback;
 	struct timespec last_frame;
-	float color[3]; // TEMPORARY
-	int dec;
 };
 
 extern struct sui_type_impl wayland_native_window_type;

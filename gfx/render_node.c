@@ -3,6 +3,7 @@
 #include <chopsui/node.h>
 #include <chopsui/render_node.h>
 #include <chopsui/scalars.h>
+#include <chopsui/util/log.h>
 
 static const char *render_attr_name = "chopsui::render_node::`impl`";
 struct sui_type_impl render_context_impl;
@@ -34,19 +35,23 @@ static struct render_node_impl *get_render_node_impl(struct sui_node *node) {
 	return impl->data;
 }
 
+void render_node_render(
+		struct sui_node *node, uint32_t width, uint32_t height) {
+	struct render_node_impl *impl = get_render_node_impl(node);
+	impl->render(node, width, height);
+}
+
 static bool context_child(struct sui_node *node, struct sui_node *child) {
-	static struct selector *select_all = NULL;
-	if (!select_all) {
-		select_all = selector_parse("*");
-		assert(select_all);
-	}
 	node_type_add_impl(child, &render_context_impl);
+	if (!node_has_type(child, &render_node_impl)) {
+		return true;
+	}
 	struct sui_node *renderable_ancestor =
 		render_node_get_renderable_ancestor(node);
 	if (renderable_ancestor) {
 		struct render_node_impl *impl =
 			get_render_node_impl(renderable_ancestor);
-		return impl->child(node, child);
+		return impl->child(renderable_ancestor, child);
 	}
 	return true;
 }

@@ -5,6 +5,7 @@
 #include <chopsui/host.h>
 #include <chopsui/node.h>
 #include <chopsui/scalars.h>
+#include <chopsui/render_node.h>
 #include <chopsui/type.h>
 #include <chopsui/util/log.h>
 #include "wayland.h"
@@ -36,13 +37,44 @@ static bool native_attr_default(const char *key, struct sui_scalar *value) {
 	return attr_spec_attr_default(&spec, key, value);
 }
 
-static bool native_child(struct sui_node *parent, struct sui_node *child) {
-	// TODO: ensure child has gl_aware type
+const char *window_renderable_child_attr =
+	"chopsui::window::`renderable_child`";
+
+static bool render_child(struct sui_node *parent, struct sui_node *child) {
+	const struct sui_scalar *attr =
+		node_get_attr(parent, window_renderable_child_attr);
+	if (attr) {
+		return false;
+	}
+	struct sui_scalar new_attr = {
+		.type = SCALAR_VOID,
+		.data = child,
+	};
+	node_set_attr(parent, window_renderable_child_attr, &new_attr);
 	return true;
+}
+
+static void render_child_removed(
+		struct sui_node *parent, struct sui_node *child) {
+	const struct sui_scalar *attr =
+		node_get_attr(parent, window_renderable_child_attr);
+	if (!attr) {
+		return;
+	}
+	node_set_attr(child, window_renderable_child_attr, NULL);
+}
+
+static struct render_node_impl render_impl = {
+	.child = render_child,
+	.child_removed = render_child_removed,
+};
+
+static void native_init(struct sui_node *node) {
+	render_node_init(node, &render_impl);
 }
 
 struct sui_type_impl native_window_type = {
 	.attr_spec = native_attr_spec,
 	.attr_default = native_attr_default,
-	.child = native_child,
+	.init = native_init,
 };

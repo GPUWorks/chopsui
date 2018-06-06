@@ -1,5 +1,6 @@
 #ifndef _CHOPSUI_RENDER_NODE_H
 #define _CHOPSUI_RENDER_NODE_H
+#include <stdbool.h>
 #include <stdint.h>
 
 extern struct sui_type_impl render_node_impl;
@@ -37,5 +38,12 @@ void render_node_init(struct sui_node *node, struct render_node_impl *impl);
  * Returns the first ancestor which implements render_node.
  */
 struct sui_node *render_node_get_renderable_ancestor(struct sui_node *node);
+
+/**
+ * Invokes the `render` function on a renderable node's render_node_impl.
+ *
+ * Aborts if the specified node is not a render node.
+ */
+void render_node_render(struct sui_node *node, uint32_t width, uint32_t height);
 
 #endif
