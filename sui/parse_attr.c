@@ -37,7 +37,8 @@ static void commit_val(void *_state, const char *str, enum string_type type) {
 	parser_log(state->pstate, "value: '%s'", str);
 	struct sui_scalar value;
 	if (type == STRING_LITERAL) {
-		if (!scalar_parse(str, &value)) {
+		// TODO: source valid scalars from node type
+		if (!scalar_parse(str, &value, SCALAR_ANY)) {
 			parser_error(state->pstate, "Unable to parse attribute value");
 		}
 	} else {

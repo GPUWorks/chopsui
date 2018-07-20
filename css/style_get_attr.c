@@ -1,20 +1,27 @@
 #include <chopsui/css.h>
 #include <chopsui/node.h>
+#include <chopsui/scalars.h>
 #include <chopsui/util/hashtable.h>
+#include <string.h>
+// TODO: gross
+#include "../node/node.h"
 #include "css.h"
+
+#include <stdio.h>
 
 struct candidate_rule {
 	const struct style_rule *rule;
-	const struct sui_scalar *value;
+	const char *value;
 	int specificity;
 };
 
-const struct sui_scalar *style_get_attr(
-		struct sui_node *node, const char *key) {
+bool style_get_attr(struct sui_node *node,
+		const char *key, struct sui_scalar *out) {
 	struct style_context *ctx = style_get_context(node);
 	const struct sui_scalar *value = node_get_attr(node, key);
 	if (value) {
-		return value;
+		memcpy(out, value, sizeof(struct sui_scalar));
+		return true;
 	}
 	struct candidate_rule candidate = {
 		.rule = NULL,
@@ -32,16 +39,31 @@ const struct sui_scalar *style_get_attr(
 				if (!node_matches_selector(node, s)) {
 					continue;
 				}
-				value = hashtable_get(rule->properties, key);
-				if (!value) {
+				char *svalue = hashtable_get(rule->properties, key);
+				if (!svalue) {
 					continue;
 				}
 				candidate.rule = rule;
 				candidate.specificity = s->specificity;
-				candidate.value = value;
+				candidate.value = svalue;
 			}
 		}
 		ctx = ctx->parent;
 	}
-	return candidate.value;
+	if (candidate.value) {
+		struct sui_type *type = node->sui_type;
+		if (!type) {
+			return false; // wat
+		}
+		uint64_t spec;
+		while (type) {
+			if (type->impl->attr_spec) {
+				spec |= type->impl->attr_spec(key);
+			}
+			type = type->next;
+		}
+		// TODO: Cache the parsed scalar for this node?
+		return scalar_parse(candidate.value, out, spec);
+	}
+	return false;
 }

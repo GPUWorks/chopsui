@@ -66,7 +66,7 @@ void selector_print(struct selector *selector, bool pretty,
 
 struct style_rule {
 	sui_list_t *selectors;
-	sui_hashtable_t *properties;
+	sui_hashtable_t *properties; // char *::char *
 };
 
 void style_rule_free(struct style_rule *style_rule);
@@ -125,6 +125,12 @@ struct stylesheet *css_load(FILE *source, errors_t **errs);
 void stylesheet_free(struct stylesheet *stylesheet);
 
 struct sui_node;
-const struct sui_scalar *style_get_attr(struct sui_node *node, const char *key);
+
+/**
+ * Applies any active stylesheets to obtain the value of the requested
+ * attribute. Returns false if the value wasn't there or could not be parsed.
+ */
+bool style_get_attr(struct sui_node *node,
+		const char *key, struct sui_scalar *out);
 
 #endif

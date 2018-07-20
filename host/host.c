@@ -21,7 +21,7 @@ static host_init_func_t detect_native_host() {
 	}
 }
 
-struct sui_host *sui_host_initialize(const char *argv_0) {
+struct sui_host *sui_host_initialize(const char *name) {
 	type_impl_register("window", &native_window_type);
 	type_impl_register("window", &render_node_impl);
 	host_init_func_t init_host = detect_native_host();
@@ -30,21 +30,22 @@ struct sui_host *sui_host_initialize(const char *argv_0) {
 	const char *home = getenv("HOME");
 	if (!config_home && home) {
 		size_t l = snprintf(NULL, 0,
-				"%s/.config/chopsui/%s/koio", home, argv_0);
+				"%s/.config/chopsui/%s/koio", home, name);
 		char *path = malloc(l + 1);
 		if (path) {
 			snprintf(path, l + 1,
-					"%s/.config/chopsui/%s/koio", home, argv_0);
+					"%s/.config/chopsui/%s/koio", home, name);
+			fprintf(stderr, "adding koio alias %s\n", path);
 			ko_add_alias("//", path);
 		}
 		free(path);
 	} else if (config_home) {
 		size_t l = snprintf(NULL, 0,
-				"%s/chopsui/%s/koio", config_home, argv_0);
+				"%s/chopsui/%s/koio", config_home, name);
 		char *path = malloc(l + 1);
 		if (path) {
 			snprintf(path, l + 1,
-					"%s/chopsui/%s/koio", config_home, argv_0);
+					"%s/chopsui/%s/koio", config_home, name);
 			ko_add_alias("//", path);
 		}
 		free(path);

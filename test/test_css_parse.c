@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <chopsui/util/hashtable.h>
 #include <chopsui/css.h>
+#include <chopsui/type.h>
 #include "test.h"
 
 char *test_name = "css/css_parse";
@@ -75,7 +76,7 @@ static int test_properties() {
 	struct style_rule *rule = ss->rules->items[0];
 	assert(rule);
 
-	char *value = hashtable_get(rule->properties, "background");
+	const char *value = hashtable_get(rule->properties, "background");
 	assert(value && strcmp(value, "red") == 0);
 
 	stylesheet_free(ss);
@@ -92,7 +93,7 @@ static int test_multi_properties() {
 	struct style_rule *rule = ss->rules->items[0];
 	assert(rule);
 
-	char *value = hashtable_get(rule->properties, "background");
+	const char *value = hashtable_get(rule->properties, "background");
 	assert(value && strcmp(value, "red") == 0);
 
 	value = hashtable_get(rule->properties, "font-weight");
@@ -135,10 +136,10 @@ static int test_errors() {
 }
 
 int test_main() {
-	return test_comments()
+	return test_multiple_selectors()
+		|| test_comments()
 		|| test_selector()
 		|| test_multiple_rules()
-		|| test_multiple_selectors()
 		|| test_properties()
 		|| test_multi_properties()
 		|| test_quoted_properties()

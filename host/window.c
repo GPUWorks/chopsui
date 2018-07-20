@@ -29,7 +29,7 @@ struct attr_spec spec[] = {
 	},
 };
 
-static uint64_t native_attr_spec(struct sui_node *node, const char *key) {
+static uint64_t native_attr_spec(const char *key) {
 	return attr_spec_attr_spec(&spec, key);
 }
 

@@ -27,17 +27,6 @@ struct sui_type_impl {
 	bool (*attr)(struct sui_node *node, const char *key,
 			const struct sui_scalar *value);
 	/**
-	 * Return the valid scalar types for this attribute, ORed together. Neither
-	 * attr nor attr_default are ever called with a value that does not match
-	 * this spec.
-	 */
-	uint64_t (*attr_spec)(struct sui_node *node, const char *key);
-	/**
-	 * Provide the default value for this attribute, or return false if you
-	 * don't have one.
-	 */
-	bool (*attr_default)(const char *key, struct sui_scalar *value);
-	/**
 	 * Invoked when a child is added to this node. Return false to prevent the
 	 * child from being added and raise an error.
 	 */
@@ -46,6 +35,20 @@ struct sui_type_impl {
 	 * Invoked when a child is removed from this node.
 	 */
 	void (*child_removed)(struct sui_node *node, struct sui_node *child);
+	// TODO: Arbitrary scalar validation/parse functions, e.g. for enums,
+	// complex scalars, etc
+	// TODO: Merge attr_spec and attr_default into each other
+	/**
+	 * Return the valid scalar types for this attribute, ORed together. Neither
+	 * attr nor attr_default are ever called with a value that does not match
+	 * this spec.
+	 */
+	uint64_t (*attr_spec)(const char *key);
+	/**
+	 * Provide the default value for this attribute, or return false if you
+	 * don't have one.
+	 */
+	bool (*attr_default)(const char *key, struct sui_scalar *value);
 };
 
 /**
@@ -58,6 +61,19 @@ void type_impl_register(const char *type, const struct sui_type_impl *impl);
  * Registers a type with many sui_type_impls. The last argument should be NULL.
  */
 void type_impls_register(const char *type, ...);
+
+/**
+ * Maps over each implementation of the specified type, along with arbitrary
+ * user data. Return false from the iter callback to cease iteration and return
+ * false to the caller.
+ */
+bool type_impls_map(const char *type,
+		bool (*iter)(const struct sui_type_impl *, void *), void *data);
+
+/**
+ * Gets the valid scalar types for a given key.
+ */
+uint32_t type_get_attr_spec(const char *type, const char *key);
 
 // TODO: Consider just making them pass this instead of letting them get fancy
 // in the sui_type_impl

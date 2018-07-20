@@ -50,10 +50,10 @@ struct sui_scalar {
 };
 
 /**
- * Parses a CSS scalar string into a sui_scalar_t. Note that this does NOT
- * handle SCALAR_STR or SCALAR_VOID.
+ * Parses a CSS scalar string into a sui_scalar_t. Pass a bitfield of types you
+ * are expecting and only those types will be considered.
  */
-bool scalar_parse(const char *s, struct sui_scalar *scalar);
+bool scalar_parse(const char *s, struct sui_scalar *scalar, uint32_t types);
 
 /**
  * Parses a CSS color string into a uint32_t

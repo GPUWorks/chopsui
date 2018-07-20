@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200809L
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,13 +6,13 @@
 #include <ctype.h>
 #include <chopsui/scalars.h>
 
-bool scalar_parse(const char *s, struct sui_scalar *scalar) {
-	if (strcmp(s, "true") == 0) {
+bool scalar_parse(const char *s, struct sui_scalar *scalar, uint32_t types) {
+	if ((types & SCALAR_BOOL) && strcmp(s, "true") == 0) {
 		scalar->type = SCALAR_BOOL;
 		scalar->bval = true;
 		return true;
 	}
-	if (strcmp(s, "false") == 0) {
+	if ((types & SCALAR_BOOL) && strcmp(s, "false") == 0) {
 		scalar->type = SCALAR_BOOL;
 		scalar->bval = false;
 		return true;
@@ -26,15 +27,23 @@ bool scalar_parse(const char *s, struct sui_scalar *scalar) {
 		scalar->type = SCALAR_INT;
 	}
 	if (unit == s) {
-		uint32_t color;
-		bool valid = color_parse(s, &color);
-		scalar->uval = color;
-		scalar->type = SCALAR_COLOR;
-		return valid;
+		if ((types & SCALAR_COLOR)) {
+			uint32_t color;
+			bool valid = color_parse(s, &color);
+			scalar->uval = color;
+			scalar->type = SCALAR_COLOR;
+			return valid;
+		}
+		if ((types & SCALAR_STR) && *s) {
+			scalar->str = strdup(s);
+			scalar->type = SCALAR_STR;
+			return true;
+		}
+		return false;
 	}
 	if (!*unit) {
 		// Is an int or a float with no unit
-		return true;
+		return !!((types & (SCALAR_FLOAT | SCALAR_INT)));
 	}
 	struct type_map {
 		char *str;
@@ -66,7 +75,7 @@ bool scalar_parse(const char *s, struct sui_scalar *scalar) {
 				scalar->fval = (float)scalar->ival;
 			}
 			scalar->type = maps[i].type;
-			return true;
+			return !!(scalar->type & types);
 		}
 	}
 	// Invalid unit

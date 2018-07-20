@@ -29,6 +29,7 @@ static void document_state_free(void *_state) {
 static void commit_selector(struct document_state *state,
 		struct parser_state *pstate) {
 	struct subparser_state *subparser = list_peek(pstate->parsers);
+	parser_log(pstate, "committing selector %s", state->selector->str);
 	struct selector *selector = selector_parse(state->selector->str);
 	if (!selector) {
 		parser_error(pstate, "Invalid selector '%s'", state->selector->str);

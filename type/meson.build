@@ -3,6 +3,7 @@ lib_sui_type = static_library(
 	files(
 		'attr_spec_attr_default.c',
 		'attr_spec_attr_spec.c',
+		'type_get_attr_spec.c',
 		'type_impl_map.c',
 		'type_impl_register.c',
 		'type_impls_register.c',

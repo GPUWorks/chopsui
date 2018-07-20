@@ -103,15 +103,10 @@ void parse_properties(struct parser_state *pstate, uint32_t ch) {
 			if (!state->value || !state->key) {
 				parser_error(pstate, "Expected key/value pair before semicolon");
 			} else {
-				struct sui_scalar _value;
-				if (!scalar_parse(state->value->str, &_value)) {
-					parser_error(pstate,
-							"Unable to parse attribute value");
-				}
-				struct sui_scalar *value = malloc(sizeof(struct sui_scalar));
-				memcpy(value, &_value, sizeof(struct sui_scalar));
+				parser_log(pstate, "committing %s: %s (%d)",
+						state->key->str, state->value->str);
 				hashtable_set(state->style_rule->properties,
-						state->key->str, value);
+						state->key->str, state->value->str);
 				free(state->key);
 				free(state->value);
 				state->key = str_create();

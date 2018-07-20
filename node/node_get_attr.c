@@ -1,15 +1,13 @@
 #include <chopsui/util/hashtable.h>
 #include <chopsui/scalars.h>
 #include <chopsui/node.h>
+#include <chopsui/type.h>
 
 struct iter_data {
 	const char *key;
 	bool provided;
 	struct sui_scalar value;
 };
-
-bool type_impls_map(const char *type,
-		bool (*iter)(const struct sui_type_impl *, void *), void *data);
 
 static bool iter(const struct sui_type_impl *impl, void *_data) {
 	struct iter_data *data = _data;
