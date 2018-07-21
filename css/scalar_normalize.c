@@ -22,7 +22,8 @@ void scalar_normalize(struct sui_scalar *scalar, struct display_info *info) {
 		scalar->fval = scalar->fval / (360 / M_2_PI);
 		break;
 	case SCALAR_GRAD:
-		// TODO: Implement this once I have internet to tell me wtf grads are
+		scalar->type = SCALAR_RAD;
+		scalar->fval = scalar->fval / (400 / M_2_PI);
 		break;
 	case SCALAR_MS:
 		scalar->type = SCALAR_S;
