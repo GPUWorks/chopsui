@@ -35,9 +35,6 @@ struct sui_type_impl {
 	 * Invoked when a child is removed from this node.
 	 */
 	void (*child_removed)(struct sui_node *node, struct sui_node *child);
-	// TODO: Arbitrary scalar validation/parse functions, e.g. for enums,
-	// complex scalars, etc
-	// TODO: Merge attr_spec and attr_default into each other
 	/**
 	 * Return the valid scalar types for this attribute, ORed together. Neither
 	 * attr nor attr_default are ever called with a value that does not match
@@ -75,8 +72,6 @@ bool type_impls_map(const char *type,
  */
 uint32_t type_get_attr_spec(const char *type, const char *key);
 
-// TODO: Consider just making them pass this instead of letting them get fancy
-// in the sui_type_impl
 /**
  * Helper type for simple implementations of type impl functions.
  */
