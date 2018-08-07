@@ -71,7 +71,7 @@ sui_libs = [
 lib_chopsui = library(
 	'chopsui',
 	link_whole: sui_libs,
-	dependencies: [wayland_client],
+	dependencies: [wayland_client, koio],
 	include_directories: sui_inc,
 	install: true,
 )
